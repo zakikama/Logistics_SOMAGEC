@@ -45,4 +45,13 @@ def get_table_Chauffeurs_Graisseurs():
             cursor = connection.cursor()
             cursor.execute("SELECT * FROM Chauffeurs_Graisseurs")
             data = (row for row in cursor.fetchall())
+            cursor.close()
         return data
+def get_matricule_Chauffeurs_Graisseurs():
+    data = ()
+    with sqlite3.connect('my_database.db') as connection:
+            cursor = connection.cursor()
+            data = [data[0] for data in cursor.execute("SELECT matricule FROM Chauffeurs_Graisseurs")]
+    return data
+
+
