@@ -51,3 +51,9 @@ def get_table_Chantier():
             cursor.execute("SELECT * FROM Chantier")
             data = (row for row in cursor.fetchall())
         return data
+def get_intitule_Chantier():
+    data = ()
+    with sqlite3.connect('my_database.db') as connection:
+            cursor = connection.cursor()
+            data = [data[0] for data in cursor.execute("SELECT intitule FROM Chantier")]
+    return data

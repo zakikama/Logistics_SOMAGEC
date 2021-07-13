@@ -45,3 +45,10 @@ def get_table_Parc_Engin():
             cursor.execute("SELECT * FROM Parc_Engin")
             data = (row for row in cursor.fetchall())
         return data
+def get_designation_Parc_Engin():
+    data = ()
+    with sqlite3.connect('my_database.db') as connection:
+            cursor = connection.cursor()
+            data = [data[0] for data in cursor.execute("SELECT designation FROM Parc_Engin")]
+    return data
+

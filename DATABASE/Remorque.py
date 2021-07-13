@@ -49,3 +49,9 @@ def get_table_Parc_Remorque():
             cursor.execute("SELECT * FROM Parc_Remorque")
             data = (row for row in cursor.fetchall())
         return data
+def get_matricule_Parc_Remorque():
+    data = ()
+    with sqlite3.connect('my_database.db') as connection:
+            cursor = connection.cursor()
+            data = [data[0] for data in cursor.execute("SELECT immatriculation FROM Parc_Remorque")]
+    return data

@@ -8,6 +8,8 @@ from main import *
 from tkinter import font as tkfont
 from OrdreMission import *
 from tkcalendar import *
+from datetime import date
+
 def save_Ordre():
     NewOrdre=OrdreDeMission()
     NewOrdre.get
@@ -60,13 +62,14 @@ class MainApp(tk.Frame):
         Graisseur = OptionMenu(bottom_box, ChafeurD, *OPTIONSG)
         Graisseur.config(highlightbackground='#0E4ED6')
         Graisseur.pack()
+        label_dateDepart = Label(bottom_box, text="Entrer le lieu de l'evenement : ")
+        label_dateDepart.pack()
+        dateDepart_entry = DateEntry(bottom_box, locale='de_DE')
+        dateDepart_entry.pack()
+    
+        dateDepart_entry._top_cal.overrideredirect(False)
+
  
-        cal= Calendar(bottom_box,background="black", disabledbackground="black", bordercolor="black", 
-               headersbackground="black", normalbackground="grey", foreground='black', 
-               normalforeground='grey', headersforeground='grey', selectmode="day",year= 2021, month=3, day=3)
-
-        cal.pack(pady=20)
-
 
         # directory=StringVar(None)
         # dirname=Entry(bottom_box,textvariable=directory,width=50)
