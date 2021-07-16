@@ -137,13 +137,10 @@ def register_user():
     prenom_entry.delete(0, END)
     password_entry.delete(0, END)
 
-    Label(register_screen, text="Registration Success",
-          fg="green", font=("calibri", 11)).pack()
 
-
-def login_verify():
-    matricule1 = matricule_verify.get()
-    password1 = password_verify.get()
+def login_verify(M,P):
+    matricule1 = M
+    password1 = P
     matricule_login_entry.delete(0, END)
     password_login_entry.delete(0, END)
     connexion = sqlite3.connect("my_database.db")
@@ -190,16 +187,17 @@ def password_not_recognised():
            command=delete_password_not_recognised).pack()
 
 
-def LogOut(CurrentUser):
-
+def LogOut():
+    f = open('User_Log.json',)
+    data = json.load(f)
+    print(data["user"])
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-    aDict = {"user": CurrentUser, "time D": dt_string}
+    aDict = {"user": data["user"], "time D": dt_string}
     jsonString = json.dumps(aDict)
     jsonFile = open("User_Log.json", "w")
     jsonFile.write(jsonString)
     jsonFile.close()
-
 
 def user_not_found():
     global user_not_found_screen
@@ -243,4 +241,5 @@ def main_account_screen():
     main_screen.mainloop()
 
 
-main_account_screen()
+
+LogOut()

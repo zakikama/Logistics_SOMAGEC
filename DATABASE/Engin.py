@@ -10,7 +10,7 @@ class engin:
         print("Designation "+ self.designationEngin+" poids " +str( self.poidsEngin))
 
 
-    def sauvgarde_Remorque(self):
+    def sauvgarde_Engin(self):
         donnees = [ self.designationEngin, self.poidsEngin]
         connexion = sqlite3.connect("my_database.db")
         curseur = connexion.cursor()

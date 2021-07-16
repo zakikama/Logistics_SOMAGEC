@@ -24,20 +24,20 @@ class vehicule:
             ''', donnees)
         connexion.commit()
         print("sauvgarde Vehicule reussi")
-def modifier_vehicule(designationnM, typeM, ptcM,ptvM,code,Mat):
-    don = [designationnM,typeM,ptcM,ptvM,code,Mat]
+def modifier_vehicule(designationnM, typeM, ptcM,ptvM,Mat):
+    don = [designationnM,typeM,ptcM,ptvM,Mat]
     connexion = sqlite3.connect("my_database.db")
     curseur = connexion.cursor()
-    sql = '''UPDATE Parc_Vehicule SET designation = ?, type = ?,ptc = ?,ptv = ? WHERE code = ? or immatriculation = ?'''
+    sql = '''UPDATE Parc_Vehicule SET designation = ?, type = ?,ptc = ?,ptv = ? WHERE immatriculation = ?'''
     curseur.execute(sql, don)
     connexion.commit()
     print("modification Vehicule reussi")
 
-def delete_Vehicule(code,matricule):
-    don = [code,matricule]
+def delete_Vehicule(matricule):
+    don = [matricule]
     connexion = sqlite3.connect("my_database.db")
     curseur = connexion.cursor()
-    sql = '''DELETE FROM Parc_Vehicule  WHERE code = ? OR immatriculation = ?'''
+    sql = '''DELETE FROM Parc_Vehicule  WHERE  immatriculation = ?'''
     curseur.execute(sql, don)
     connexion.commit()
     print("SUPPRESSION Vehicule reussi")
