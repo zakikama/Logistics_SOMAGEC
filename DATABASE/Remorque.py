@@ -33,11 +33,11 @@ def modifier_remorque(designationnM, typeM, ptcM,ptvM,Mat):
     connexion.commit()
     print("modification Remorque reussi")
 
-def delete_Remorque(code,matricule):
-    don = [code,matricule]
+def delete_Remorque(matricule):
+    don = [matricule]
     connexion = sqlite3.connect("my_database.db")
     curseur = connexion.cursor()
-    sql = '''DELETE FROM Parc_Remorque  WHERE code = ? OR immatriculation = ?'''
+    sql = '''DELETE FROM Parc_Remorque WHERE immatriculation = ?'''
     curseur.execute(sql, don)
     connexion.commit()
     print("SUPPRESSION Remorque reussi")

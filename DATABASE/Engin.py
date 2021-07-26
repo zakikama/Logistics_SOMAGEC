@@ -51,4 +51,9 @@ def get_designation_Parc_Engin():
             cursor = connection.cursor()
             data = [data[0] for data in cursor.execute("SELECT designation FROM Parc_Engin")]
     return data
-
+def get_code_Parc_Engin():
+    data = ()
+    with sqlite3.connect('my_database.db') as connection:
+            cursor = connection.cursor()
+            data = [data[0] for data in cursor.execute("SELECT code FROM Parc_Engin")]
+    return data

@@ -57,3 +57,10 @@ def get_intitule_Chantier():
             cursor = connection.cursor()
             data = [data[0] for data in cursor.execute("SELECT intitule FROM Chantier")]
     return data
+def get_code_Chantier():
+    data = ()
+    with sqlite3.connect('my_database.db') as connection:
+            cursor = connection.cursor()
+            data = [data[0] for data in cursor.execute("SELECT code FROM Chantier")]
+    return data
+

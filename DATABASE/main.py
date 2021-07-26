@@ -18,7 +18,7 @@ import bcrypt
 import json
 from datetime import datetime
 from tkinter import messagebox
-
+from cryptography.fernet import Fernet
 
 ##############################
 #    Formulaire D'ajout      #
@@ -38,8 +38,10 @@ def Formulaire_Personnels():
         y = eventorigin.y
         if ((418 <= x <= 427 and 683 <= y <= 716) or (418 <= x <= 452 and 709 <= y <= 716) or (427 <= x <= 452 and 683 <= y <= 709)):
             save()
+
     def enter_Tapped(event):
         save()
+
     def save():
         c = chauf_grais()
         c.nom = nom_entry.get()
@@ -47,7 +49,8 @@ def Formulaire_Personnels():
         c.prenom = prenom_entry.get()
         c.fonction = fonction.get()
         c.sauvgarde_chauf_grais()
-        messagebox.showinfo("showinfo", "Sauvgarde de "+matricule_entry.get()+" Reussis ")
+        messagebox.showinfo("showinfo", "Sauvgarde de " +
+                            matricule_entry.get()+" Reussis ")
 
     root.img = ImageTk.PhotoImage(resize_image)
     global nom
@@ -149,8 +152,8 @@ def Formulaire_Personnels():
     )
     root.bind("<Button 1>", triangleClicked)
     root.bind("<Return>", enter_Tapped)
-    root.bind('<KP_Enter>',enter_Tapped)
-    root.resizable(0,0)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
     root.mainloop()
 def Formulaire_Chantier():
     root = tk.Toplevel(app)
@@ -167,8 +170,10 @@ def Formulaire_Chantier():
         y = eventorigin.y
         if ((418 <= x <= 427 and 683 <= y <= 716) or (418 <= x <= 452 and 709 <= y <= 716) or (427 <= x <= 452 and 683 <= y <= 709)):
             save()
+
     def enter_Tapped(event):
         save()
+
     def save():
         c = chantier()
         c.intituleChantier = intituleChantier_entry.get()
@@ -176,7 +181,8 @@ def Formulaire_Chantier():
         c.adresseChantier = adresseChantier_entry.get()
         c.nomRespChantier = nomRespChantier.get()
         c.sauvgarde_Chantier()
-        messagebox.showinfo("showinfo", "Sauvgarde de "+intituleChantier_entry.get()+" Reussis ")
+        messagebox.showinfo("showinfo", "Sauvgarde de " +
+                            intituleChantier_entry.get()+" Reussis ")
 
     root.img = ImageTk.PhotoImage(resize_image)
     global intituleChantier
@@ -278,8 +284,8 @@ def Formulaire_Chantier():
 
     root.bind("<Button 1>", triangleClicked)
     root.bind("<Return>", enter_Tapped)
-    root.bind('<KP_Enter>',enter_Tapped)
-    root.resizable(0,0)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
     root.mainloop()
 def Formulaire_Vehicule():
     root = tk.Toplevel(app)
@@ -305,14 +311,17 @@ def Formulaire_Vehicule():
     immatriculationVehicule = StringVar()
     ptcVehicule = StringVar()
     ptvVehicule = StringVar()
+
     def triangleClicked(eventorigin):
         global x, y
         x = eventorigin.x
         y = eventorigin.y
         if ((418 <= x <= 427 and 683 <= y <= 716) or (418 <= x <= 452 and 709 <= y <= 716) or (427 <= x <= 452 and 683 <= y <= 709)):
             save()
+
     def enter_Tapped(event):
         save()
+
     def save():
         c = vehicule()
         c.designationVehicule = designationVehicule_entry.get()
@@ -321,10 +330,11 @@ def Formulaire_Vehicule():
         c.ptcVehicule = float(ptcVehicule.get())
         c.ptvVehicule = float(ptvVehicule.get())
         c.sauvgarde_Vehicule()
-        messagebox.showinfo("showinfo", "Sauvgarde de "+designationVehicule_entry.get()+" Reussis ")
+        messagebox.showinfo("showinfo", "Sauvgarde de " +
+                            designationVehicule_entry.get()+" Reussis ")
 
     root.img = ImageTk.PhotoImage(resize_image)
-    
+
     canvas = Canvas(
         root,
         width=500,
@@ -423,8 +433,8 @@ def Formulaire_Vehicule():
     )
     root.bind("<Button 1>", triangleClicked)
     root.bind("<Return>", enter_Tapped)
-    root.bind('<KP_Enter>',enter_Tapped)
-    root.resizable(0,0)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
     root.mainloop()
 def Formulaire_Remorque():
     root = tk.Toplevel(app)
@@ -434,8 +444,10 @@ def Formulaire_Remorque():
 
     # Reszie the image using resize() method
     resize_image = image.resize((500, 750))
+
     def enter_Tapped(event):
         save()
+
     def triangleClicked(eventorigin):
         global x, y
         x = eventorigin.x
@@ -451,7 +463,8 @@ def Formulaire_Remorque():
         c.ptcRemorque = float(ptcRemorque.get())
         c.ptvRemorque = float(ptvRemorque.get())
         c.sauvgarde_Remorque()
-        messagebox.showinfo("showinfo", "Sauvgarde de "+designationRemorque_entry.get()+" Reussis ")
+        messagebox.showinfo("showinfo", "Sauvgarde de " +
+                            designationRemorque_entry.get()+" Reussis ")
 
     root.img = ImageTk.PhotoImage(resize_image)
     global designationRemorque
@@ -572,8 +585,8 @@ def Formulaire_Remorque():
 
     root.bind("<Button 1>", triangleClicked)
     root.bind("<Return>", enter_Tapped)
-    root.bind('<KP_Enter>',enter_Tapped)
-    root.resizable(0,0)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
     root.mainloop()
 def Formulaire_Engin():
     root = tk.Toplevel(app)
@@ -584,22 +597,24 @@ def Formulaire_Engin():
     # Reszie the image using resize() method
     resize_image = image.resize((500, 750))
 
-
     def triangleClicked(eventorigin):
         global x, y
         x = eventorigin.x
         y = eventorigin.y
         if ((418 <= x <= 427 and 683 <= y <= 716) or (418 <= x <= 452 and 709 <= y <= 716) or (427 <= x <= 452 and 683 <= y <= 709)):
             save()
+
     def enter_Tapped(event):
         save()
+
     def save():
-        c=engin()
-        c.designationEngin=designationEngin_entry.get()
-        c.poidsEngin=float(poidsEngin.get())
+        c = engin()
+        c.designationEngin = designationEngin_entry.get()
+        c.poidsEngin = float(poidsEngin.get())
         c.sauvgarde_Engin()
-        messagebox.showinfo("showinfo", "Sauvgarde de "+designationEngin_entry.get()+" Reussis ")
-        
+        messagebox.showinfo("showinfo", "Sauvgarde de " +
+                            designationEngin_entry.get()+" Reussis ")
+
     root.img = ImageTk.PhotoImage(resize_image)
     global designationEngin
     global poidsEngin
@@ -607,11 +622,8 @@ def Formulaire_Engin():
     global designationEngin_entry
     global poidsEngin_entry
 
-
-
-    designationEngin= StringVar()
+    designationEngin = StringVar()
     poidsEngin = StringVar()
-
 
     canvas = Canvas(
         root,
@@ -644,11 +656,9 @@ def Formulaire_Engin():
         font=('HIND Light', 20),
     )
 
-
-
     designationEngin_entry = Entry(root, textvariable=designationEngin)
     designationEngin_entry.config(highlightbackground='#eeeeee',
-                        foreground="#ff6815", background='#eeeeee')
+                                  foreground="#ff6815", background='#eeeeee')
     designationEngin_entry_canvas = canvas.create_window(
         200,
         220,
@@ -658,7 +668,7 @@ def Formulaire_Engin():
 
     poidsEngin_entry = Entry(root, textvariable=poidsEngin)
     poidsEngin_entry.config(highlightbackground='#eeeeee',
-                        foreground="#ff6815", background='#eeeeee')
+                            foreground="#ff6815", background='#eeeeee')
     poidsEngin_entry_canvas = canvas.create_window(
         200,
         270,
@@ -668,29 +678,1480 @@ def Formulaire_Engin():
 
     root.bind("<Button 1>", triangleClicked)
     root.bind("<Return>", enter_Tapped)
-    root.bind('<KP_Enter>',enter_Tapped)
-    root.resizable(0,0)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
     root.mainloop()
 
+##############################
+# Formulaire De modification #
+##############################
+def Formulaire_MChantier(Chantier):
+    root = tk.Toplevel(app)
+    root.title("Modifier Chantier")
+    image = Image.open(
+        '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/Form.png')
+
+    # Reszie the image using resize() method
+    resize_image = image.resize((500, 750))
+
+    def triangleClicked(eventorigin):
+        global x, y
+        x = eventorigin.x
+        y = eventorigin.y
+        if ((418 <= x <= 427 and 683 <= y <= 716) or (418 <= x <= 452 and 709 <= y <= 716) or (427 <= x <= 452 and 683 <= y <= 709)):
+            edit()
+
+    def enter_Tapped(event):
+        edit()
+
+    def edit():
+
+        modifier_chantier(intituleChantier_entry.get(), adresseChantier_entry.get(
+        ), villeChantier_entry.get(), nomRespChantier.get(), codeChantier.get())
+
+        messagebox.showinfo("showinfo", "modification de " +
+                            intituleChantier_entry.get()+" Reussis ")
+
+    root.img = ImageTk.PhotoImage(resize_image)
+    global intituleChantier
+    global adresseChantier
+    global nomRespChantier
+    global villeChantier
+    global codeChantier
+    global codeChantier_entry
+    global intituleChantier_entry
+    global adresseChantier_entry
+    global villeChantier_entry
+    global nomRespChantier_entry
+    codeChantier = StringVar()
+    intituleChantier = StringVar()
+    adresseChantier = StringVar()
+    villeChantier = StringVar()
+    nomRespChantier = StringVar()
+    canvas = Canvas(
+        root,
+        width=500,
+        height=1000,
+        bg="#2d5b6b",
+        bd=0,
+        highlightthickness=0
+    )
+
+    canvas.pack(fill='both', expand=True)
+
+    canvas.create_image(
+        0,
+        0,
+        image=root.img,
+        anchor="nw"
+
+    )
+    if Chantier != []:
+
+        canvas.create_text(
+            80,
+            140,
+            text='code :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            190,
+            text='Ville :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            240,
+            text='Libellé :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            290,
+            text='Adresse :',
+            font=('HIND Light', 20),
+        )
+
+        canvas.create_text(
+            80,
+            340,
+            text='Responsable :',
+            font=('HIND Light', 20),
+        )
+        codeChantier_entry = Entry(root, textvariable=codeChantier)
+        codeChantier_entry.insert(END, Chantier[0])
+        codeChantier_entry.config(highlightbackground='#eeeeee',
+                                  foreground="#ff6815", background='#eeeeee')
+        codeChantier_entry_canvas = canvas.create_window(
+            200,
+            120,
+            anchor="nw",
+            window=codeChantier_entry,
+        )
+        villeChantier_entry = Entry(root, textvariable=villeChantier)
+        villeChantier_entry.insert(END, Chantier[3])
+        villeChantier_entry.config(highlightbackground='#eeeeee',
+                                   foreground="#ff6815", background='#eeeeee')
+        villeChantier_entry_canvas = canvas.create_window(
+            200,
+            170,
+            anchor="nw",
+            window=villeChantier_entry,
+        )
+        intituleChantier_entry = Entry(root, textvariable=intituleChantier)
+        intituleChantier_entry.insert(END, Chantier[1])
+        intituleChantier_entry.config(highlightbackground='#eeeeee',
+                                      foreground="#ff6815", background='#eeeeee')
+        intituleChantier_entry_canvas = canvas.create_window(
+            200,
+            220,
+            anchor="nw",
+            window=intituleChantier_entry,
+        )
+        adresseChantier_entry = Entry(root, textvariable=adresseChantier)
+        adresseChantier_entry.insert(END, Chantier[2])
+        adresseChantier_entry.config(highlightbackground='#eeeeee',
+                                     foreground="#ff6815", background='#eeeeee')
+        adresseChantier_entry_canvas = canvas.create_window(
+            200,
+            270,
+            anchor="nw",
+            window=adresseChantier_entry,
+        )
+
+        nomRespChantier_entry = Entry(root, textvariable=nomRespChantier)
+        nomRespChantier_entry.insert(END, Chantier[4])
+        nomRespChantier_entry.config(highlightbackground='#eeeeee',
+                                     foreground="#ff6815", background='#eeeeee')
+        nomRespChantier_entry_canvas = canvas.create_window(
+            200,
+            320,
+            anchor="nw",
+            window=nomRespChantier_entry,
+        )
+    else:
+
+        canvas.create_text(
+            80,
+            140,
+            text='code :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            190,
+            text='Ville :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            240,
+            text='Libellé :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            290,
+            text='Adresse :',
+            font=('HIND Light', 20),
+        )
+
+        canvas.create_text(
+            80,
+            340,
+            text='Responsable :',
+            font=('HIND Light', 20),
+        )
+        codeChantier_entry = Entry(root, textvariable=codeChantier)
+        codeChantier_entry.config(highlightbackground='#eeeeee',
+                                  foreground="#ff6815", background='#eeeeee')
+        codeChantier_entry_canvas = canvas.create_window(
+            200,
+            120,
+            anchor="nw",
+            window=codeChantier_entry,
+        )
+        villeChantier_entry = Entry(root, textvariable=villeChantier)
+        villeChantier_entry.config(highlightbackground='#eeeeee',
+                                   foreground="#ff6815", background='#eeeeee')
+        villeChantier_entry_canvas = canvas.create_window(
+            200,
+            170,
+            anchor="nw",
+            window=villeChantier_entry,
+        )
+        intituleChantier_entry = Entry(root, textvariable=intituleChantier)
+        intituleChantier_entry.config(highlightbackground='#eeeeee',
+                                      foreground="#ff6815", background='#eeeeee')
+        intituleChantier_entry_canvas = canvas.create_window(
+            200,
+            220,
+            anchor="nw",
+            window=intituleChantier_entry,
+        )
+        adresseChantier_entry = Entry(root, textvariable=adresseChantier)
+        adresseChantier_entry.config(highlightbackground='#eeeeee',
+                                     foreground="#ff6815", background='#eeeeee')
+        adresseChantier_entry_canvas = canvas.create_window(
+            200,
+            270,
+            anchor="nw",
+            window=adresseChantier_entry,
+        )
+
+        nomRespChantier_entry = Entry(root, textvariable=nomRespChantier)
+        nomRespChantier_entry.config(highlightbackground='#eeeeee',
+                                     foreground="#ff6815", background='#eeeeee')
+        nomRespChantier_entry_canvas = canvas.create_window(
+            200,
+            320,
+            anchor="nw",
+            window=nomRespChantier_entry,)
+    root.bind("<Button 1>", triangleClicked)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+def Formulaire_MVehicule(Vehicule):
+    root = tk.Toplevel(app)
+    root.title("Modifier Vehicule")
+    image = Image.open(
+        '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/Form.png')
+
+    # Reszie the image using resize() method
+    resize_image = image.resize((500, 750))
+
+    def triangleClicked(eventorigin):
+        global x, y
+        x = eventorigin.x
+        y = eventorigin.y
+        if ((418 <= x <= 427 and 683 <= y <= 716) or (418 <= x <= 452 and 709 <= y <= 716) or (427 <= x <= 452 and 683 <= y <= 709)):
+            print("CLICK")
+            edit()
+
+    def enter_Tapped(event):
+        print("enter")
+        edit()
+
+    def edit():
+
+        modifier_vehicule(designationVehicule_entry.get(), typeVehicule_entry.get(
+        ), ptcVehicule_entry.get(), ptvVehicule_entry.get(), immatriculationVehicule_entry.get())
+
+        messagebox.showinfo("showinfo", "modification de " +
+                            designationVehicule_entry.get()+" Reussis ")
+
+    root.img = ImageTk.PhotoImage(resize_image)
+    global designationVehicule
+    global typeVehicule
+    global ptcVehicule
+    global ptvVehicule
+    global immatriculationVehicule
+
+    global designationVehicule_entry
+    global typeVehicule_entry
+    global immatriculationVehicule_entry
+    global ptcVehicule_entry
+    global ptvVehicule_entry
+
+    designationVehicule = StringVar()
+    typeVehicule = StringVar()
+    immatriculationVehicule = StringVar()
+    ptcVehicule = StringVar()
+    ptvVehicule = StringVar()
+
+    canvas = Canvas(
+        root,
+        width=500,
+        height=1000,
+        bg="#2d5b6b",
+        bd=0,
+        highlightthickness=0
+    )
+
+    canvas.pack(fill='both', expand=True)
+
+    canvas.create_image(
+        0,
+        0,
+        image=root.img,
+        anchor="nw"
+
+    )
+    if Vehicule != []:
+        canvas.create_text(
+            80,
+            190,
+            text='Immatriculation :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            240,
+            text='Libellé :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            290,
+            text='Type:',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            340,
+            text='PTC(kg) :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            390,
+            text='PTV(kg) :',
+            font=('HIND Light', 20),
+        )
+        immatriculationVehicule_entry = Entry(
+            root, textvariable=immatriculationVehicule)
+        immatriculationVehicule_entry.insert(END, Vehicule[2])
+        immatriculationVehicule_entry.config(highlightbackground='#eeeeee',
+                                             foreground="#ff6815", background='#eeeeee')
+        immatriculationVehicule_entry_canvas = canvas.create_window(
+            200,
+            170,
+            anchor="nw",
+            window=immatriculationVehicule_entry,
+        )
+        designationVehicule_entry = Entry(
+            root, textvariable=designationVehicule)
+        designationVehicule_entry.insert(END, Vehicule[1])
+        designationVehicule_entry.config(highlightbackground='#eeeeee',
+                                         foreground="#ff6815", background='#eeeeee')
+        designationVehicule_entry_canvas = canvas.create_window(
+            200,
+            220,
+            anchor="nw",
+            window=designationVehicule_entry,
+        )
+        typeVehicule_entry = Entry(root, textvariable=typeVehicule)
+        typeVehicule_entry.insert(END, Vehicule[3])
+        typeVehicule_entry.config(highlightbackground='#eeeeee',
+                                  foreground="#ff6815", background='#eeeeee')
+        typeVehicule_entry_canvas = canvas.create_window(
+            200,
+            270,
+            anchor="nw",
+            window=typeVehicule_entry,
+        )
+
+        ptcVehicule_entry = Entry(root, textvariable=ptcVehicule)
+        ptcVehicule_entry.insert(END, Vehicule[4])
+        ptcVehicule_entry.config(highlightbackground='#eeeeee',
+                                 foreground="#ff6815", background='#eeeeee')
+        ptcVehicule_entry_canvas = canvas.create_window(
+            200,
+            320,
+            anchor="nw",
+            window=ptcVehicule_entry,
+        )
+        ptvVehicule_entry = Entry(root, textvariable=ptvVehicule)
+        ptvVehicule_entry.insert(END, Vehicule[5])
+        ptvVehicule_entry.config(highlightbackground='#eeeeee',
+                                 foreground="#ff6815", background='#eeeeee')
+        ptvVehicule_entry_canvas = canvas.create_window(
+            200,
+            370,
+            anchor="nw",
+            window=ptvVehicule_entry,
+        )
+
+    else:
+
+        canvas.create_text(
+            80,
+            190,
+            text='Immatriculation :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            240,
+            text='Libellé :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            290,
+            text='Type:',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            340,
+            text='PTC(kg) :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            390,
+            text='PTV(kg) :',
+            font=('HIND Light', 20),
+        )
+        immatriculationVehicule_entry = Entry(
+            root, textvariable=immatriculationVehicule)
+        immatriculationVehicule_entry.config(highlightbackground='#eeeeee',
+                                             foreground="#ff6815", background='#eeeeee')
+        immatriculationVehicule_entry_canvas = canvas.create_window(
+            200,
+            170,
+            anchor="nw",
+            window=immatriculationVehicule_entry,
+        )
+        designationVehicule_entry = Entry(
+            root, textvariable=designationVehicule)
+        designationVehicule_entry.config(highlightbackground='#eeeeee',
+                                         foreground="#ff6815", background='#eeeeee')
+        designationVehicule_entry_canvas = canvas.create_window(
+            200,
+            220,
+            anchor="nw",
+            window=designationVehicule_entry,
+        )
+        typeVehicule_entry = Entry(root, textvariable=typeVehicule)
+        typeVehicule_entry.config(highlightbackground='#eeeeee',
+                                  foreground="#ff6815", background='#eeeeee')
+        typeVehicule_entry_canvas = canvas.create_window(
+            200,
+            270,
+            anchor="nw",
+            window=typeVehicule_entry,
+        )
+
+        ptcVehicule_entry = Entry(root, textvariable=ptcVehicule)
+        ptcVehicule_entry.config(highlightbackground='#eeeeee',
+                                 foreground="#ff6815", background='#eeeeee')
+        ptcVehicule_entry_canvas = canvas.create_window(
+            200,
+            320,
+            anchor="nw",
+            window=ptcVehicule_entry,
+        )
+        ptvVehicule_entry = Entry(root, textvariable=ptvVehicule)
+        ptvVehicule_entry.config(highlightbackground='#eeeeee',
+                                 foreground="#ff6815", background='#eeeeee')
+        ptvVehicule_entry_canvas = canvas.create_window(
+            200,
+            370,
+            anchor="nw",
+            window=ptvVehicule_entry,
+        )
+
+    root.bind("<Button 1>", triangleClicked)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+def Formulaire_MRemorque(Remorque):
+    root = tk.Toplevel(app)
+    root.title("Modifier Remorque")
+    image = Image.open(
+        '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/Form.png')
+
+    # Reszie the image using resize() method
+    resize_image = image.resize((500, 750))
+
+    def triangleClicked(eventorigin):
+        global x, y
+        x = eventorigin.x
+        y = eventorigin.y
+        if ((418 <= x <= 427 and 683 <= y <= 716) or (418 <= x <= 452 and 709 <= y <= 716) or (427 <= x <= 452 and 683 <= y <= 709)):
+            print("CLICK")
+            edit()
+
+    def enter_Tapped(event):
+        print("enter")
+        edit()
+
+    def edit():
+
+        modifier_remorque(designationRemorque_entry.get(), typeRemorque_entry.get(
+        ), ptcRemorque_entry.get(), ptvRemorque_entry.get(), immatriculationRemorque_entry.get())
+
+        messagebox.showinfo("showinfo", "modification de " +
+                            designationRemorque_entry.get()+" Reussis ")
+
+    root.img = ImageTk.PhotoImage(resize_image)
+    global designationRemorque
+    global typeRemorque
+    global ptcRemorque
+    global ptvRemorque
+    global immatriculationRemorque
+
+    global designationRemorque_entry
+    global typeRemorque_entry
+    global immatriculationRemorque_entry
+    global ptcRemorque_entry
+    global ptvRemorque_entry
+
+    designationRemorque = StringVar()
+    typeRemorque = StringVar()
+    immatriculationRemorque = StringVar()
+    ptcRemorque = StringVar()
+    ptvRemorque = StringVar()
+
+    canvas = Canvas(
+        root,
+        width=500,
+        height=1000,
+        bg="#2d5b6b",
+        bd=0,
+        highlightthickness=0
+    )
+
+    canvas.pack(fill='both', expand=True)
+
+    canvas.create_image(
+        0,
+        0,
+        image=root.img,
+        anchor="nw"
+
+    )
+    if Remorque != []:
+        canvas.create_text(
+            80,
+            190,
+            text='Immatriculation :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            240,
+            text='Libellé :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            290,
+            text='Type:',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            340,
+            text='PTC(kg) :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            390,
+            text='PTV(kg) :',
+            font=('HIND Light', 20),
+        )
+        immatriculationRemorque_entry = Entry(
+            root, textvariable=immatriculationRemorque)
+        immatriculationRemorque_entry.insert(END, Remorque[2])
+        immatriculationRemorque_entry.config(highlightbackground='#eeeeee',
+                                             foreground="#ff6815", background='#eeeeee')
+        immatriculationRemorque_entry_canvas = canvas.create_window(
+            200,
+            170,
+            anchor="nw",
+            window=immatriculationRemorque_entry,
+        )
+        designationRemorque_entry = Entry(
+            root, textvariable=designationRemorque)
+        designationRemorque_entry.insert(END, Remorque[1])
+        designationRemorque_entry.config(highlightbackground='#eeeeee',
+                                         foreground="#ff6815", background='#eeeeee')
+        designationRemorque_entry_canvas = canvas.create_window(
+            200,
+            220,
+            anchor="nw",
+            window=designationRemorque_entry,
+        )
+        typeRemorque_entry = Entry(root, textvariable=typeRemorque)
+        typeRemorque_entry.insert(END, Remorque[3])
+        typeRemorque_entry.config(highlightbackground='#eeeeee',
+                                  foreground="#ff6815", background='#eeeeee')
+        typeRemorque_entry_canvas = canvas.create_window(
+            200,
+            270,
+            anchor="nw",
+            window=typeRemorque_entry,
+        )
+
+        ptcRemorque_entry = Entry(root, textvariable=ptcRemorque)
+        ptcRemorque_entry.insert(END, Remorque[4])
+        ptcRemorque_entry.config(highlightbackground='#eeeeee',
+                                 foreground="#ff6815", background='#eeeeee')
+        ptcRemorque_entry_canvas = canvas.create_window(
+            200,
+            320,
+            anchor="nw",
+            window=ptcRemorque_entry,
+        )
+        ptvRemorque_entry = Entry(root, textvariable=ptvRemorque)
+        ptvRemorque_entry.insert(END, Remorque[5])
+        ptvRemorque_entry.config(highlightbackground='#eeeeee',
+                                 foreground="#ff6815", background='#eeeeee')
+        ptvRemorque_entry_canvas = canvas.create_window(
+            200,
+            370,
+            anchor="nw",
+            window=ptvRemorque_entry,
+        )
+
+    else:
+
+        canvas.create_text(
+            80,
+            190,
+            text='Immatriculation :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            240,
+            text='Libellé :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            290,
+            text='Type:',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            340,
+            text='PTC(kg) :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            390,
+            text='PTV(kg) :',
+            font=('HIND Light', 20),
+        )
+        immatriculationRemorque_entry = Entry(
+            root, textvariable=immatriculationRemorque)
+        immatriculationRemorque_entry.config(highlightbackground='#eeeeee',
+                                             foreground="#ff6815", background='#eeeeee')
+        immatriculationRemorque_entry_canvas = canvas.create_window(
+            200,
+            170,
+            anchor="nw",
+            window=immatriculationRemorque_entry,
+        )
+        designationRemorque_entry = Entry(
+            root, textvariable=designationRemorque)
+        designationRemorque_entry.config(highlightbackground='#eeeeee',
+                                         foreground="#ff6815", background='#eeeeee')
+        designationRemorque_entry_canvas = canvas.create_window(
+            200,
+            220,
+            anchor="nw",
+            window=designationRemorque_entry,
+        )
+        typeRemorque_entry = Entry(root, textvariable=typeRemorque)
+        typeRemorque_entry.config(highlightbackground='#eeeeee',
+                                  foreground="#ff6815", background='#eeeeee')
+        typeRemorque_entry_canvas = canvas.create_window(
+            200,
+            270,
+            anchor="nw",
+            window=typeRemorque_entry,
+        )
+
+        ptcRemorque_entry = Entry(root, textvariable=ptcRemorque)
+        ptcRemorque_entry.config(highlightbackground='#eeeeee',
+                                 foreground="#ff6815", background='#eeeeee')
+        ptcRemorque_entry_canvas = canvas.create_window(
+            200,
+            320,
+            anchor="nw",
+            window=ptcRemorque_entry,
+        )
+        ptvRemorque_entry = Entry(root, textvariable=ptvRemorque)
+        ptvRemorque_entry.config(highlightbackground='#eeeeee',
+                                 foreground="#ff6815", background='#eeeeee')
+        ptvRemorque_entry_canvas = canvas.create_window(
+            200,
+            370,
+            anchor="nw",
+            window=ptvRemorque_entry,
+        )
+
+    root.bind("<Button 1>", triangleClicked)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+def Formulaire_MEngin(Engin):
+    root = tk.Toplevel(app)
+    root.title("Modifier Engin")
+    image = Image.open(
+        '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/Form.png')
+
+    # Reszie the image using resize() method
+    resize_image = image.resize((500, 750))
+
+    def triangleClicked(eventorigin):
+        global x, y
+        x = eventorigin.x
+        y = eventorigin.y
+        if ((418 <= x <= 427 and 683 <= y <= 716) or (418 <= x <= 452 and 709 <= y <= 716) or (427 <= x <= 452 and 683 <= y <= 709)):
+            print("CLICK")
+            edit()
+
+    def enter_Tapped(event):
+        print("enter")
+        edit()
+
+    def edit():
+
+        modifier_engin(designationEngin_entry.get(), poidsEngin_entry.get(
+        ), codeEngin_entry.get())
+
+        messagebox.showinfo("showinfo", "modification de " +
+                            designationEngin_entry.get()+" Reussis ")
+
+    root.img = ImageTk.PhotoImage(resize_image)
+    global designationEngin
+    global poidsEngin
+    global codeEngin
+
+    global designationEngin_entry
+    global poidsEngin_entry
+    global codeEngin_entry
+
+    designationEngin = StringVar()
+    poidsEngin = StringVar()
+    codeEngin = StringVar()
+
+    canvas = Canvas(
+        root,
+        width=500,
+        height=1000,
+        bg="#2d5b6b",
+        bd=0,
+        highlightthickness=0
+    )
+
+    canvas.pack(fill='both', expand=True)
+
+    canvas.create_image(
+        0,
+        0,
+        image=root.img,
+        anchor="nw"
+
+    )
+    if Engin != []:
+        canvas.create_text(
+            80,
+            190,
+            text='Code :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            240,
+            text='Libellé :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            290,
+            text='Poids (Kg):',
+            font=('HIND Light', 20),
+        )
+
+        codeEngin_entry = Entry(
+            root, textvariable=codeEngin)
+        codeEngin_entry.insert(END, Engin[0])
+        codeEngin_entry.config(highlightbackground='#eeeeee',
+                               foreground="#ff6815", background='#eeeeee')
+        codeEngin_entry_canvas = canvas.create_window(
+            200,
+            170,
+            anchor="nw",
+            window=codeEngin_entry,
+        )
+        designationEngin_entry = Entry(root, textvariable=designationEngin)
+        designationEngin_entry.insert(END, Engin[1])
+        designationEngin_entry.config(highlightbackground='#eeeeee',
+                                      foreground="#ff6815", background='#eeeeee')
+        designationEngin_entry_canvas = canvas.create_window(
+            200,
+            220,
+            anchor="nw",
+            window=designationEngin_entry,
+        )
+        poidsEngin_entry = Entry(root, textvariable=poidsEngin)
+        poidsEngin_entry.insert(END, Engin[2])
+        poidsEngin_entry.config(highlightbackground='#eeeeee',
+                                foreground="#ff6815", background='#eeeeee')
+        typeRemorque_entry_canvas = canvas.create_window(
+            200,
+            270,
+            anchor="nw",
+            window=poidsEngin_entry,
+        )
+
+    else:
+
+        canvas.create_text(
+            80,
+            190,
+            text='Code :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            240,
+            text='Libellé :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            290,
+            text='Poids (Kg):',
+            font=('HIND Light', 20),
+        )
+
+        codeEngin_entry = Entry(
+            root, textvariable=codeEngin)
+
+        codeEngin_entry.config(highlightbackground='#eeeeee',
+                               foreground="#ff6815", background='#eeeeee')
+        codeEngin_entry_canvas = canvas.create_window(
+            200,
+            170,
+            anchor="nw",
+            window=codeEngin_entry,
+        )
+        designationEngin_entry = Entry(root, textvariable=designationEngin)
+
+        designationEngin_entry.config(highlightbackground='#eeeeee',
+                                      foreground="#ff6815", background='#eeeeee')
+        designationEngin_entry_canvas = canvas.create_window(
+            200,
+            220,
+            anchor="nw",
+            window=designationEngin_entry,
+        )
+        poidsEngin_entry = Entry(root, textvariable=poidsEngin)
+
+        poidsEngin_entry.config(highlightbackground='#eeeeee',
+                                foreground="#ff6815", background='#eeeeee')
+        typeRemorque_entry_canvas = canvas.create_window(
+            200,
+            270,
+            anchor="nw",
+            window=poidsEngin_entry,
+        )
+
+    root.bind("<Button 1>", triangleClicked)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+def Formulaire_MPersonnel(Personelle):
+    root = tk.Toplevel(app)
+    root.title("Modifier Personnel")
+    image = Image.open(
+        '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/Form.png')
+    resize_image = image.resize((500, 750))
+    def triangleClicked(eventorigin):
+        global x, y
+        x = eventorigin.x
+        y = eventorigin.y
+        if ((418 <= x <= 427 and 683 <= y <= 716) or (418 <= x <= 452 and 709 <= y <= 716) or (427 <= x <= 452 and 683 <= y <= 709)):
+            print("CLICK")
+            edit()
+    def enter_Tapped(event):
+        print("enter")
+        edit()
+
+    def edit():
+
+        modifier_chauf_grais(fonctionPersonnel_entry.get(), MatriculePersonnel_entry.get())
+
+        messagebox.showinfo("showinfo", "modification de " +
+                            MatriculePersonnel_entry.get()+" Reussis ")
+
+    root.img = ImageTk.PhotoImage(resize_image)
+    global fonctionPersonnel
+    global MatriculePersonnel
+
+    global fonctionPersonnel_entry
+    global MatriculePersonnel_entry
+
+
+    fonctionPersonnel = StringVar()
+    MatriculePersonnel = StringVar()
+
+
+    canvas = Canvas(
+        root,
+        width=500,
+        height=1000,
+        bg="#2d5b6b",
+        bd=0,
+        highlightthickness=0
+    )
+
+    canvas.pack(fill='both', expand=True)
+
+    canvas.create_image(
+        0,
+        0,
+        image=root.img,
+        anchor="nw"
+
+    )
+    if Personelle != []:
+        canvas.create_text(
+            80,
+            190,
+            text='Matricule :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            240,
+            text='Fonctions * :',
+            font=('HIND Light', 20),
+        )
+
+        MatriculePersonnel_entry = Entry(
+            root, textvariable=MatriculePersonnel)
+        MatriculePersonnel_entry.insert(END, Personelle[0])
+        MatriculePersonnel_entry.config(highlightbackground='#eeeeee',
+                               foreground="#ff6815", background='#eeeeee')
+        MatriculePersonnel_entry_canvas = canvas.create_window(
+            200,
+            170,
+            anchor="nw",
+            window=MatriculePersonnel_entry,
+        )
+        fonctionPersonnel_entry = Entry(root, textvariable=fonctionPersonnel)
+        fonctionPersonnel_entry.insert(END, Personelle[3])
+        fonctionPersonnel_entry.config(highlightbackground='#eeeeee',
+                                      foreground="#ff6815", background='#eeeeee')
+        fonctionPersonnel_entry_canvas = canvas.create_window(
+            200,
+            220,
+            anchor="nw",
+            window=fonctionPersonnel_entry,
+        )
+    else:
+
+        canvas.create_text(
+            80,
+            190,
+            text='Matricule :',
+            font=('HIND Light', 20),
+        )
+        canvas.create_text(
+            80,
+            240,
+            text='Fonctions *  :',
+            font=('HIND Light', 20),
+        )
+        
+
+        MatriculePersonnel_entry = Entry(
+            root, textvariable=MatriculePersonnel)
+
+        MatriculePersonnel_entry.config(highlightbackground='#eeeeee',
+                               foreground="#ff6815", background='#eeeeee')
+        MatriculePersonnel_entry_canvas = canvas.create_window(
+            200,
+            170,
+            anchor="nw",
+            window=MatriculePersonnel_entry,
+        )
+        fonctionPersonnel_entry = Entry(root, textvariable=fonctionPersonnel)
+
+        fonctionPersonnel_entry.config(highlightbackground='#eeeeee',
+                                      foreground="#ff6815", background='#eeeeee')
+        fonctionPersonnel_entry_canvas = canvas.create_window(
+            200,
+            220,
+            anchor="nw",
+            window=fonctionPersonnel_entry,
+        )
+
+    root.bind("<Button 1>", triangleClicked)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+##############################
+# Formulaire De modification #
+##############################
+def Formulaire_supp_Chantier():
+    root = tk.Toplevel(app)
+    root.title("supprimer Chantier")
+    image = Image.open(
+        '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/SmallForm.png')
+
+    # Reszie the image using resize() method
+    resize_image = image.resize((500, 200))
+
+    def enter_Tapped(event):
+        save()
+
+    def save():
+        MsgBox = tk.messagebox.askquestion ('Suppression','Are you sure ?',icon = 'warning')
+        if MsgBox == 'yes':
+            code_ = code_entry.get()
+            delete_chantier(code_)
+            messagebox.showinfo("showinfo", "suppression Reussis ")
+            root.destroy()
+        else:
+            tk.messagebox.showinfo('Return','You will now return to the application screen')
+        
+
+    root.img = ImageTk.PhotoImage(resize_image)
+    code = StringVar()
+    canvas = Canvas(
+        root,
+        width=500,
+        height=200,
+        bg="#2d5b6b",
+        bd=0,
+        highlightthickness=0
+    )
+
+    canvas.pack(fill='both', expand=True)
+
+    canvas.create_image(
+        0,
+        0,
+        image=root.img,
+        anchor="nw"
+
+    )
+    canvas.create_text(
+        120,
+        100,
+        text='Code :',
+        font=('HIND Light', 20),
+    )
+
+    code_Liste=get_code_Chantier()
+    code_entry =ttk.Combobox(root, textvariable=code)
+    code_entry['values'] = code_Liste
+    code_entry['state'] = 'normal'  # normal
+
+    code_entry_canvas = canvas.create_window(
+        170,
+        90,
+        anchor="nw",
+        window=code_entry,
+    )
+    btn_LogIn = Button(
+                root,
+                text='SUPPRIMER',
+                command=lambda: save(),
+                width=10,
+                height=1,
+                highlightthickness=0,
+                borderwidth=0,
+                bd=0,
+                highlightbackground="#eeeeee",
+                foreground="#FF5733",
+                font=('HIND Light', 18)
+            )
+    btn_LogIn_canvas = canvas.create_window(
+                390,
+                160,
+                anchor="nw",
+                window=btn_LogIn,
+            )
+    # code_entry.bind('<<ComboboxSelected>>',enter_Tapped)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+def Formulaire_supp_Vehicule():
+    root = tk.Toplevel(app)
+    root.title("supprimer vehicule")
+    image = Image.open(
+        '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/SmallForm.png')
+
+    # Reszie the image using resize() method
+    resize_image = image.resize((500, 200))
+
+    def enter_Tapped(event):
+        save()
+
+    def save():
+        MsgBox = tk.messagebox.askquestion ('Suppression','Are you sure ?',icon = 'warning')
+        if MsgBox == 'yes':
+            matricule_ = matricule_entry.get()
+            delete_Vehicule(matricule_)
+            messagebox.showinfo("showinfo", "suppression Reussis ")
+            root.destroy()
+        else:
+            tk.messagebox.showinfo('Return','You will now return to the application screen')
+        
+
+    root.img = ImageTk.PhotoImage(resize_image)
+    matricule = StringVar()
+    canvas = Canvas(
+        root,
+        width=500,
+        height=200,
+        bg="#2d5b6b",
+        bd=0,
+        highlightthickness=0
+    )
+
+    canvas.pack(fill='both', expand=True)
+
+    canvas.create_image(
+        0,
+        0,
+        image=root.img,
+        anchor="nw"
+
+    )
+    canvas.create_text(
+        120,
+        100,
+        text='Matricule :',
+        font=('HIND Light', 20),
+    )
+
+    matricule_Liste=get_matricule_Parc_Vehicule()
+    matricule_entry =ttk.Combobox(root, textvariable=matricule)
+    matricule_entry['values'] = matricule_Liste
+    matricule_entry['state'] = 'normal'  # normal
+
+    matricule_entry_canvas = canvas.create_window(
+        170,
+        90,
+        anchor="nw",
+        window=matricule_entry,
+    )
+    btn_LogIn = Button(
+                root,
+                text='SUPPRIMER',
+                command=lambda: save(),
+                width=10,
+                height=1,
+                highlightthickness=0,
+                borderwidth=0,
+                bd=0,
+                highlightbackground="#eeeeee",
+                foreground="#FF5733",
+                font=('HIND Light', 18)
+            )
+    btn_LogIn_canvas = canvas.create_window(
+                390,
+                160,
+                anchor="nw",
+                window=btn_LogIn,
+            )
+
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+def Formulaire_supp_Remorque():
+    root = tk.Toplevel(app)
+    root.title("supprimer Remorque")
+    image = Image.open(
+        '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/SmallForm.png')
+
+    # Reszie the image using resize() method
+    resize_image = image.resize((500, 200))
+
+    def enter_Tapped(event):
+        save()
+
+    def save():
+        MsgBox = tk.messagebox.askquestion ('Suppression','Are you sure ?',icon = 'warning')
+        if MsgBox == 'yes':
+            matricule_ = matricule_entry.get()
+            delete_Remorque(matricule_)
+            messagebox.showinfo("showinfo", "suppression Reussis ")
+            root.destroy()
+        else:
+            tk.messagebox.showinfo('Return','You will now return to the application screen')
+        
+
+    root.img = ImageTk.PhotoImage(resize_image)
+    matricule = StringVar()
+    canvas = Canvas(
+        root,
+        width=500,
+        height=200,
+        bg="#2d5b6b",
+        bd=0,
+        highlightthickness=0
+    )
+
+    canvas.pack(fill='both', expand=True)
+
+    canvas.create_image(
+        0,
+        0,
+        image=root.img,
+        anchor="nw"
+
+    )
+    canvas.create_text(
+        120,
+        100,
+        text='Matricule :',
+        font=('HIND Light', 20),
+    )
+
+    matricule_Liste=get_matricule_Parc_Remorque()
+    matricule_entry =ttk.Combobox(root, textvariable=matricule)
+    matricule_entry['values'] = matricule_Liste
+    matricule_entry['state'] = 'normal'  # normal
+
+    matricule_entry_canvas = canvas.create_window(
+        170,
+        90,
+        anchor="nw",
+        window=matricule_entry,
+    )
+    btn_LogIn = Button(
+                root,
+                text='SUPPRIMER',
+                command=lambda: save(),
+                width=10,
+                height=1,
+                highlightthickness=0,
+                borderwidth=0,
+                bd=0,
+                highlightbackground="#eeeeee",
+                foreground="#FF5733",
+                font=('HIND Light', 18)
+            )
+    btn_LogIn_canvas = canvas.create_window(
+                390,
+                160,
+                anchor="nw",
+                window=btn_LogIn,
+            )
+
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+def Formulaire_supp_Engin():
+    root = tk.Toplevel(app)
+    root.title("supprimer Engin")
+    image = Image.open(
+        '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/SmallForm.png')
+
+    # Reszie the image using resize() method
+    resize_image = image.resize((500, 200))
+    def enter_Tapped(event):
+        save()
+    def save():
+        MsgBox = tk.messagebox.askquestion(
+            'Suppression', 'Are you sure ?', icon='warning')
+        if MsgBox == 'yes':
+            code_ = code_entry.get()
+            delete_engin(code_)
+            messagebox.showinfo("showinfo", "suppression Reussis ")
+            root.destroy()
+        else:
+            tk.messagebox.showinfo(
+                'Return', 'You will now return to the application screen')
+
+
+    root.img = ImageTk.PhotoImage(resize_image)
+    code = StringVar()
+    canvas = Canvas(
+        root,
+        width=500,
+        height=200,
+        bg="#2d5b6b",
+        bd=0,
+        highlightthickness=0
+    )
+
+    canvas.pack(fill='both', expand=True)
+
+    canvas.create_image(
+        0,
+        0,
+        image=root.img,
+        anchor="nw"
+
+    )
+    canvas.create_text(
+        120,
+        100,
+        text='Code :',
+        font=('HIND Light', 20),
+    )
+
+    code_Liste = get_code_Parc_Engin()
+    code_entry = ttk.Combobox(root, textvariable=code)
+    code_entry['values'] = code_Liste
+    code_entry['state'] = 'normal'  # normal
+
+    code_entry_canvas = canvas.create_window(
+        170,
+        90,
+        anchor="nw",
+        window=code_entry,
+    )
+    btn_LogIn = Button(
+        root,
+        text='SUPPRIMER',
+        command=lambda: save(),
+        width=10,
+        height=1,
+        highlightthickness=0,
+        borderwidth=0,
+        bd=0,
+        highlightbackground="#eeeeee",
+        foreground="#FF5733",
+        font=('HIND Light', 18)
+    )
+    btn_LogIn_canvas = canvas.create_window(
+        390,
+        160,
+        anchor="nw",
+        window=btn_LogIn,
+    )
+    # code_entry.bind('<<ComboboxSelected>>',enter_Tapped)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+def Formulaire_supp_Perso():
+    root = tk.Toplevel(app)
+    root.title("supprimer Personnel")
+    image = Image.open(
+        '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/SmallForm.png')
+
+    # Reszie the image using resize() method
+    resize_image = image.resize((500, 200))
+
+    def enter_Tapped(event):
+        save()
+
+    def save():
+        MsgBox = tk.messagebox.askquestion ('Suppression','Are you sure ?',icon = 'warning')
+        if MsgBox == 'yes':
+            matricule_ = matricule_entry.get()
+            delete_Chauffeurs_Graisseurs(matricule_)
+            messagebox.showinfo("showinfo", "suppression Reussis ")
+            root.destroy()
+        else:
+            tk.messagebox.showinfo('Return','You will now return to the application screen')
+        
+
+    root.img = ImageTk.PhotoImage(resize_image)
+    matricule = StringVar()
+    canvas = Canvas(
+        root,
+        width=500,
+        height=200,
+        bg="#2d5b6b",
+        bd=0,
+        highlightthickness=0
+    )
+
+    canvas.pack(fill='both', expand=True)
+
+    canvas.create_image(
+        0,
+        0,
+        image=root.img,
+        anchor="nw"
+
+    )
+    canvas.create_text(
+        120,
+        100,
+        text='Matricule :',
+        font=('HIND Light', 20),
+    )
+
+    matricule_Liste=get_matricule_Chauffeurs_Graisseurs()
+    matricule_entry =ttk.Combobox(root, textvariable=matricule)
+    matricule_entry['values'] = matricule_Liste
+    matricule_entry['state'] = 'normal'  # normal
+
+    matricule_entry_canvas = canvas.create_window(
+        170,
+        90,
+        anchor="nw",
+        window=matricule_entry,
+    )
+    btn_LogIn = Button(
+                root,
+                text='SUPPRIMER',
+                command=lambda: save(),
+                width=10,
+                height=1,
+                highlightthickness=0,
+                borderwidth=0,
+                bd=0,
+                highlightbackground="#eeeeee",
+                foreground="#FF5733",
+                font=('HIND Light', 18)
+            )
+    btn_LogIn_canvas = canvas.create_window(
+                390,
+                160,
+                anchor="nw",
+                window=btn_LogIn,
+            )
+
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
 ##############################
 #   Gestion d'utilisateur    #
 ##############################
 def LogOut():
+    file = open('key.key','rb')
+    key = file.read()
+    file.close()
     f = open('User_Log.json',)
     data = json.load(f)
     print(data["user"])
-    now = datetime.now()
-    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-    aDict = {"user": data["user"], "time D": dt_string}
-    jsonString = json.dumps(aDict)
-    jsonFile = open("User_Log.json", "w")
-    jsonFile.write(jsonString)
-    jsonFile.close()
-    messagebox.showinfo("showinfo", "Déconnexion")
+    if data["Status"]=="C":
+        print("test Status")
+        now = datetime.now()
+        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        aDict = {"user": data["user"], "time ": dt_string, "Status":"D"}
+        jsonString = json.dumps(aDict)
+        jsonFile = open("User_Log.json", "w")
+        jsonFile.write(jsonString)
+        jsonFile.close()
+        with open('User_Log.json','rb') as f:
+            data_cry = f.read()
+        fernet = Fernet(key)
+        encrypted=fernet.encrypt(data_cry)
+        with open('User_Log.json','wb') as f:
+            f.write(encrypted)
+        print("encryption succes")
+        messagebox.showinfo("showinfo", "Déconnexion")
+
+        
 
 ##############################
 #  initialisation de la BDD  #
 ##############################
+
+
 def create_connection(db_file):
     """ create a database connection to a SQLite database """
     conn = None
@@ -700,6 +2161,8 @@ def create_connection(db_file):
     except Error as e:
         print(e)
     return conn
+
+
 def create_table(conn, create_table_sql):
     """ create a table from the create_table_sql statement
     :param conn: Connection object
@@ -711,6 +2174,8 @@ def create_table(conn, create_table_sql):
         c.execute(create_table_sql)
     except Error as e:
         print(e)
+
+
 def intialiser_DATABASE():
     database = "my_database.db"
     sql_create_User = """ CREATE TABLE IF NOT EXISTS Users(
@@ -792,6 +2257,8 @@ def intialiser_DATABASE():
 ################################
 # Declaration de l application #
 ################################
+
+
 class SampleApp(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -827,6 +2294,8 @@ class SampleApp(tk.Tk):
         frame.tkraise()
 
 ######--------Dashboard-------########
+
+
 class HomePage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -882,6 +2351,8 @@ class HomePage(tk.Frame):
         bottom_box.pack(expand=True, fill="both", padx=10, pady=10)
 
 ######--------les donnees de la BDD-------########
+
+
 class LogisticsPage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -937,144 +2408,13 @@ class LogisticsPage(tk.Frame):
         label_top.pack()
         bottom_box = tk.Frame(right_frame,
                               bg="#2d5b6b", relief="solid")
-        style = ttk.Style(bottom_box)
-
-        style.theme_create('pastel', settings={
-
-            "TNotebook": {
-                "configure": {
-                    "background": '#2d5b6b',  # Your margin color
-                    # margins: left, top, right, separator
-                    "tabmargins": [2, 5, 0, 0],
-                }
-            },
-            "TNotebook.Tab": {
-                "configure": {
-                    "background": '#458093',  # tab color when not selected
-                    # [space between text and horizontal tab-button border, space between text and vertical tab_button border]
-                    "padding": [10, 2],
-                    "font": "white",
-                    "foreground": 'white'
-                },
-                "map": {
-                    # Tab color when selected
-                   "background": [("selected", '#F76515')],
-                    "expand": [("selected", [1, 1, 1, 0])]  # text margins
-                }
-            }
-        })
-        # style.configure("Treeview", background="#383838")
-        style.theme_use('pastel')
-
-        tabs = ttk.Notebook(bottom_box)
-        tab1 = tk.Frame(tabs, background="#2d5b6b")
-        tab2 = tk.Frame(tabs, background="#2d5b6b")
-        tab3 = tk.Frame(tabs, background="#2d5b6b")
-        tab4 = tk.Frame(tabs, background="#2d5b6b")
-        tab5 = tk.Frame(tabs, background="#2d5b6b")
-
-        tabs.add(tab1, text='Chantiers')
-        tabs.add(tab2, text='Vehicules')
-        tabs.add(tab3, text='Remorques')
-        tabs.add(tab4, text='Engins')
-        tabs.add(tab5, text='Graisseurs')
-
-        table = Table(tab1, headings=('code', 'intitule', 'adresse',
-                                      'ville', 'nom responsable'), rows=get_table_Chantier())
-        table.pack(expand=tk.YES, fill=tk.BOTH)
-
-        ButtonFont = tkinter.font.Font(
-            family='HIND Light', size=16)
-
-        button_Ajouter = tk.Button(
-            tab1, text="Ajouter", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#189E11', command=lambda: Formulaire_Chantier())
-        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Modifier = tk.Button(
-            tab1, text="Modifier", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#0E4ED6')
-        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Supprimer = tk.Button(
-            tab1, text="Supprimer", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#D60A0A')
-        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
-        button_retour = tk.Button(tab1, text="retour", font=ButtonFont, highlightbackground="#2d5b6b",
-                                  command=lambda: controller.show_frame("HomePage"))
-        button_retour.pack(padx=10, pady=10, side=tk.RIGHT)
-
-        table = Table(tab2, headings=('code', 'designation', 'immatriculation',
-                                      'type', 'ptc', 'ptv'), rows=get_table_Parc_Vehicule())
-        table.pack(expand=tk.YES, fill=tk.BOTH)
-
-        button_Ajouter = tk.Button(
-            tab2, text="Ajouter", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#189E11', command=lambda: Formulaire_Vehicule())
-        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Modifier = tk.Button(
-            tab2, text="Modifier", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#0E4ED6')
-        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Supprimer = tk.Button(
-            tab2, text="Supprimer", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#D60A0A')
-        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
-        button_retour = tk.Button(tab2, text="retour", highlightbackground="#2d5b6b", font=ButtonFont,
-                                  command=lambda: controller.show_frame("HomePage"))
-        button_retour.pack(padx=10, pady=10, side=tk.RIGHT)
-
-        table = Table(tab3, headings=('code', 'designation', 'immatriculation',
-                                      'type', 'ptc', 'ptv'), rows=get_table_Parc_Remorque())
-        table.pack(expand=tk.YES, fill=tk.BOTH)
-
-        button_Ajouter = tk.Button(
-            tab3, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11', command=lambda: Formulaire_Remorque())
-        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Modifier = tk.Button(
-            tab3, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6')
-        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Supprimer = tk.Button(
-            tab3, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A')
-        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
-        button_retour = tk.Button(tab3, text="retour", font=ButtonFont, highlightbackground="#2d5b6b",
-                                  command=lambda: controller.show_frame("HomePage"))
-        button_retour.pack(padx=10, pady=10, side=tk.RIGHT)
-
-        table = Table(tab4, headings=('code', 'designation',
-                                      'poids'), rows=get_table_Parc_Engin())
-        table.pack(expand=tk.YES, fill=tk.BOTH)
-
-        button_Ajouter = tk.Button(
-            tab4, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11')
-        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Modifier = tk.Button(
-            tab4, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6')
-        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Supprimer = tk.Button(
-            tab4, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A', command=lambda: delete_engin(1))
-        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
-        button_retour = tk.Button(tab4, text="retour", font=ButtonFont, highlightbackground="#2d5b6b",
-                                  command=lambda: controller.show_frame("HomePage"))
-        button_retour.pack(padx=10, pady=10, side=tk.RIGHT)
-
-        table = Table(tab5, headings=('matricule', 'nom', 'prenom',
-                                      'fonction'), rows=get_table_Chauffeurs_Graisseurs())
-        table.pack(expand=tk.YES, fill=tk.BOTH)
-
-        button_Ajouter = tk.Button(
-            tab5, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11', command=lambda: Formulaire_Personnels())
-        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Modifier = tk.Button(
-            tab5, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6')
-        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Supprimer = tk.Button(
-            tab5, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A')
-        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
-        button_retour = tk.Button(tab5, text="retour", font=ButtonFont, highlightbackground="#2d5b6b",
-                                  command=lambda: controller.show_frame("HomePage"))
-        button_retour.pack(padx=10, pady=10, side=tk.RIGHT)
-        # add frames to notebook
-
-        # label = tk.Label(self, text="This is page 1", font=controller.title_font)
-        # label.pack(side="top", fill="x", pady=10)
-
-        tabs.pack(pady=10, fill="both", expand=True)
+        my_gui = Tableau_Donnees(bottom_box)
+        my_gui.pack(pady=10, fill="both", expand=True)
         bottom_box.pack(expand=True, fill="both", padx=10, pady=10)
 
 ######--------Gestion Des Ordres de Mission-------########
+
+
 class TraitmentPage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -1162,6 +2502,7 @@ class TraitmentPage(tk.Frame):
             Ord.ChantierArrivee = ChantierDA.get()
             Ord.NatureTrasport = NatureTrD.get()
             Ord.sauvgarde_Ordre()
+            Ord.print_Ordre()
         bottom_box = tk.Frame(right_frame,
                               bg="#2d5b6b", relief="solid")
         # FORMULAIRE Ordre de Mission
@@ -1249,12 +2590,15 @@ class TraitmentPage(tk.Frame):
         button_Save = tk.Button(
             bottom_box, text="Enregistrer", font=ButtonFont, highlightbackground="#2d5b6b", command=save_Ordre)
         button_Save.pack(padx=10, pady=10, fill='none', side='left')
+        
         button_retour = tk.Button(bottom_box, text="<--", font=ButtonFont, highlightbackground="#2d5b6b", foreground="red",
                                   command=lambda: controller.show_frame("HomePage"))
         button_retour.pack(padx=10, pady=10, fill='none', side='right')
         bottom_box.pack(expand=True, fill="both")
 
 ######--------Page de Connexion-------########
+
+
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -1344,6 +2688,8 @@ class StartPage(tk.Frame):
         )
 
 ######--------Creer Compte-------########
+
+
 class RegisterPage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -1560,7 +2906,133 @@ class RegisterPage(tk.Frame):
         # # using grid
         # button2.grid(row=2, column=1, padx=10, pady=10)
 
+
+class Tableau_Donnees(tk.Frame):
+    def __init__(self, parent):
+        self.parents = parent
+        tk.Frame.__init__(self, parent)
+        tabs = ttk.Notebook(self)
+        tab1 = tk.Frame(tabs, background="#2d5b6b")
+        tab2 = tk.Frame(tabs, background="#2d5b6b")
+        tab3 = tk.Frame(tabs, background="#2d5b6b")
+        tab4 = tk.Frame(tabs, background="#2d5b6b")
+        tab5 = tk.Frame(tabs, background="#2d5b6b")
+
+        tabs.add(tab1, text='Chantiers')
+        tabs.add(tab2, text='Vehicules')
+        tabs.add(tab3, text='Remorques')
+        tabs.add(tab4, text='Engins')
+        tabs.add(tab5, text='Personnel')
+        ###################
+        #    Chantiers    #
+        ###################
+        table1 = Table(tab1, headings=('code', 'intitule', 'adresse',
+                                       'ville', 'nom responsable'), rows=get_table_Chantier())
+
+        table1.pack(expand=tk.YES, fill=tk.BOTH)
+
+        ButtonFont = tkinter.font.Font(
+            family='HIND Light', size=16)
+
+        button_Ajouter = tk.Button(
+            tab1, text="Ajouter", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#189E11', command=lambda: Formulaire_Chantier())
+        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
+        button_Modifier = tk.Button(
+            tab1, text="Modifier", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#0E4ED6', command=lambda: Formulaire_MChantier(table1.GetSelected()))
+        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
+        button_Supprimer = tk.Button(
+            tab1, text="Supprimer", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#D60A0A',command=lambda:Formulaire_supp_Chantier())
+        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
+        button_refresh = tk.Button(tab1, text="refresh", font=ButtonFont,
+                                   highlightbackground="#2d5b6b", command=lambda: self.refresh_table(self.parents))
+        button_refresh.pack(padx=10, pady=10, side=tk.RIGHT)
+        ###################
+        #    Vehicules    #
+        ###################
+        table2 = Table(tab2, headings=('code', 'designation', 'immatriculation',
+                                       'type', 'ptc', 'ptv'), rows=get_table_Parc_Vehicule())
+        table2.pack(expand=tk.YES, fill=tk.BOTH)
+
+        button_Ajouter = tk.Button(
+            tab2, text="Ajouter", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#189E11', command=lambda: Formulaire_Vehicule())
+        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
+        button_Modifier = tk.Button(
+            tab2, text="Modifier", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#0E4ED6', command=lambda: Formulaire_MVehicule(table2.GetSelected()))
+        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
+        button_Supprimer = tk.Button(
+            tab2, text="Supprimer", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#D60A0A',command=lambda:Formulaire_supp_Vehicule())
+        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
+        button_refresh = tk.Button(
+            tab2, text="refresh", highlightbackground="#2d5b6b", font=ButtonFont, command=lambda: self.refresh_table(self.parents))
+        button_refresh.pack(padx=10, pady=10, side=tk.RIGHT)
+        ###################
+        #    Remorques    #
+        ###################
+        table3 = Table(tab3, headings=('code', 'designation', 'immatriculation',
+                                       'type', 'ptc', 'ptv'), rows=get_table_Parc_Remorque())
+        table3.pack(expand=tk.YES, fill=tk.BOTH)
+
+        button_Ajouter = tk.Button(
+            tab3, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11', command=lambda: Formulaire_Remorque())
+        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
+        button_Modifier = tk.Button(
+            tab3, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6', command=lambda: Formulaire_MRemorque(table3.GetSelected()))
+        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
+        button_Supprimer = tk.Button(
+            tab3, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A',command=lambda:Formulaire_supp_Remorque())
+        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
+        button_refresh = tk.Button(tab3, text="refresh", font=ButtonFont,
+                                   highlightbackground="#2d5b6b", command=lambda: self.refresh_table(self.parents))
+        button_refresh.pack(padx=10, pady=10, side=tk.RIGHT)
+        ###################
+        #      Engins     #
+        ###################
+        table4 = Table(tab4, headings=('code', 'designation',
+                                       'poids'), rows=get_table_Parc_Engin())
+        table4.pack(expand=tk.YES, fill=tk.BOTH)
+
+        button_Ajouter = tk.Button(
+            tab4, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11', command=lambda: Formulaire_Engin())
+        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
+        button_Modifier = tk.Button(
+            tab4, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6', command=lambda: Formulaire_MEngin(table4.GetSelected()))
+        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
+        button_Supprimer = tk.Button(
+            tab4, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A', command=lambda:Formulaire_supp_Engin())
+        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
+        button_refresh = tk.Button(tab4, text="refresh", font=ButtonFont,
+                                   highlightbackground="#2d5b6b", command=lambda: self.refresh_table(self.parents))
+        button_refresh.pack(padx=10, pady=10, side=tk.RIGHT)
+        ###################
+        #    Personnel    #
+        ###################
+        table5 = Table(tab5, headings=('matricule', 'nom', 'prenom',
+                                       'fonction'), rows=get_table_Chauffeurs_Graisseurs())
+        table5.pack(expand=tk.YES, fill=tk.BOTH)
+
+        button_Ajouter = tk.Button(
+            tab5, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11', command=lambda: Formulaire_Personnels())
+        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
+        button_Modifier = tk.Button(
+            tab5, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6', command=lambda:Formulaire_MPersonnel(table5.GetSelected()))
+        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
+        button_Supprimer = tk.Button(
+            tab5, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A',command=lambda:Formulaire_supp_Perso())
+        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
+        button_refresh = tk.Button(tab5, text="refresh", font=ButtonFont,
+                                   highlightbackground="#2d5b6b", command=lambda: self.refresh_table(self.parents))
+        button_refresh.pack(padx=10, pady=10, side=tk.RIGHT)
+        tabs.pack(fill="both", expand=True)
+
+    def refresh_table(self, rot):
+        self.destroy()
+        self.__init__(rot)
+        self.pack(pady=10, fill="both", expand=True)
+        print("Refreshed")
+
 ######--------Se connecter -------########
+
+
 class LogIn(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -1701,10 +3173,21 @@ class LogIn(tk.Frame):
             result = curseur.fetchone()
             curseur.close()
             if result and verify_password(password1, result[1]):
+                file = open('key.key','rb')
+                key = file.read()
+                file.close()
+                with open('User_Log.json','rb') as f:
+                    encrypted = f.read()
+                fernet = Fernet(key)
+                decrypted=fernet.decrypt(encrypted)
+                with open('User_Log.json','wb') as f:
+                    f.write(decrypted)
+                    
+                print("decryption success")
                 print("LogIn succes")
                 now = datetime.now()
                 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-                aDict = {"user": result[0], "time C": dt_string}
+                aDict = {"user": result[0], "time ": dt_string, "Status": "C"}
                 jsonString = json.dumps(aDict)
                 jsonFile = open("User_Log.json", "w")
                 jsonFile.write(jsonString)
@@ -1712,6 +3195,7 @@ class LogIn(tk.Frame):
                 messagebox.showinfo("showinfo", "Connection Reussis")
                 controller.show_frame("HomePage")
                 print("succes")
+                
             else:
                 messagebox.showwarning(
                     "showwarning", "Matricule ou Mot de passe incorrecte")
@@ -1720,17 +3204,25 @@ class LogIn(tk.Frame):
                 print("failed")
 
 
+def on_closing():
+    LogOut()
+    app.destroy()
+
+
 if __name__ == "__main__":
-    
+
     intialiser_DATABASE()
     app = SampleApp()
-    width= app.winfo_screenwidth() 
-    height= app.winfo_screenheight()-50
+    width = app.winfo_screenwidth()
+    height = app.winfo_screenheight()-50
 
     app.geometry("%dx%d" % (width, height))
     # app.geometry("1800x1000")
-    app.resizable(0,0)
-    ico = tk.Image("photo", file="/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/ico.png")
+    app.resizable(0, 0)
+    ico = tk.Image(
+        "photo", file="/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/ico.png")
 
-    app.tk.call('wm','iconphoto', app._w, ico)
+    app.tk.call('wm', 'iconphoto', app._w, ico)
+    app.protocol("WM_DELETE_WINDOW", on_closing)
     app.mainloop()
+    
