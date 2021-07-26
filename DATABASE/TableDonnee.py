@@ -672,8 +672,8 @@ def Formulaire_Engin():
 
 
 def Formulaire_MChantier(Chantier):
-    root1 = tk.Toplevel(root)
-    root1.title("Modifier Chantier")
+    root = tk.Toplevel(app)
+    root.title("Modifier Chantier")
     image = Image.open(
         '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/Form.png')
 
@@ -698,7 +698,7 @@ def Formulaire_MChantier(Chantier):
         messagebox.showinfo("showinfo", "modification de " +
                             intituleChantier_entry.get()+" Reussis ")
 
-    root1.img = ImageTk.PhotoImage(resize_image)
+    root.img = ImageTk.PhotoImage(resize_image)
     global intituleChantier
     global adresseChantier
     global nomRespChantier
@@ -715,7 +715,7 @@ def Formulaire_MChantier(Chantier):
     villeChantier = StringVar()
     nomRespChantier = StringVar()
     canvas = Canvas(
-        root1,
+        root,
         width=500,
         height=1000,
         bg="#2d5b6b",
@@ -728,7 +728,7 @@ def Formulaire_MChantier(Chantier):
     canvas.create_image(
         0,
         0,
-        image=root1.img,
+        image=root.img,
         anchor="nw"
 
     )
@@ -765,7 +765,7 @@ def Formulaire_MChantier(Chantier):
             text='Responsable :',
             font=('HIND Light', 20),
         )
-        codeChantier_entry = Entry(root1, textvariable=codeChantier)
+        codeChantier_entry = Entry(root, textvariable=codeChantier)
         codeChantier_entry.insert(END, Chantier[0])
         codeChantier_entry.config(highlightbackground='#eeeeee',
                                   foreground="#ff6815", background='#eeeeee')
@@ -775,7 +775,7 @@ def Formulaire_MChantier(Chantier):
             anchor="nw",
             window=codeChantier_entry,
         )
-        villeChantier_entry = Entry(root1, textvariable=villeChantier)
+        villeChantier_entry = Entry(root, textvariable=villeChantier)
         villeChantier_entry.insert(END, Chantier[3])
         villeChantier_entry.config(highlightbackground='#eeeeee',
                                    foreground="#ff6815", background='#eeeeee')
@@ -785,7 +785,7 @@ def Formulaire_MChantier(Chantier):
             anchor="nw",
             window=villeChantier_entry,
         )
-        intituleChantier_entry = Entry(root1, textvariable=intituleChantier)
+        intituleChantier_entry = Entry(root, textvariable=intituleChantier)
         intituleChantier_entry.insert(END, Chantier[1])
         intituleChantier_entry.config(highlightbackground='#eeeeee',
                                       foreground="#ff6815", background='#eeeeee')
@@ -795,7 +795,7 @@ def Formulaire_MChantier(Chantier):
             anchor="nw",
             window=intituleChantier_entry,
         )
-        adresseChantier_entry = Entry(root1, textvariable=adresseChantier)
+        adresseChantier_entry = Entry(root, textvariable=adresseChantier)
         adresseChantier_entry.insert(END, Chantier[2])
         adresseChantier_entry.config(highlightbackground='#eeeeee',
                                      foreground="#ff6815", background='#eeeeee')
@@ -806,7 +806,7 @@ def Formulaire_MChantier(Chantier):
             window=adresseChantier_entry,
         )
 
-        nomRespChantier_entry = Entry(root1, textvariable=nomRespChantier)
+        nomRespChantier_entry = Entry(root, textvariable=nomRespChantier)
         nomRespChantier_entry.insert(END, Chantier[4])
         nomRespChantier_entry.config(highlightbackground='#eeeeee',
                                      foreground="#ff6815", background='#eeeeee')
@@ -849,7 +849,7 @@ def Formulaire_MChantier(Chantier):
             text='Responsable :',
             font=('HIND Light', 20),
         )
-        codeChantier_entry = Entry(root1, textvariable=codeChantier)
+        codeChantier_entry = Entry(root, textvariable=codeChantier)
         codeChantier_entry.config(highlightbackground='#eeeeee',
                                   foreground="#ff6815", background='#eeeeee')
         codeChantier_entry_canvas = canvas.create_window(
@@ -858,7 +858,7 @@ def Formulaire_MChantier(Chantier):
             anchor="nw",
             window=codeChantier_entry,
         )
-        villeChantier_entry = Entry(root1, textvariable=villeChantier)
+        villeChantier_entry = Entry(root, textvariable=villeChantier)
         villeChantier_entry.config(highlightbackground='#eeeeee',
                                    foreground="#ff6815", background='#eeeeee')
         villeChantier_entry_canvas = canvas.create_window(
@@ -867,7 +867,7 @@ def Formulaire_MChantier(Chantier):
             anchor="nw",
             window=villeChantier_entry,
         )
-        intituleChantier_entry = Entry(root1, textvariable=intituleChantier)
+        intituleChantier_entry = Entry(root, textvariable=intituleChantier)
         intituleChantier_entry.config(highlightbackground='#eeeeee',
                                       foreground="#ff6815", background='#eeeeee')
         intituleChantier_entry_canvas = canvas.create_window(
@@ -876,7 +876,7 @@ def Formulaire_MChantier(Chantier):
             anchor="nw",
             window=intituleChantier_entry,
         )
-        adresseChantier_entry = Entry(root1, textvariable=adresseChantier)
+        adresseChantier_entry = Entry(root, textvariable=adresseChantier)
         adresseChantier_entry.config(highlightbackground='#eeeeee',
                                      foreground="#ff6815", background='#eeeeee')
         adresseChantier_entry_canvas = canvas.create_window(
@@ -886,7 +886,7 @@ def Formulaire_MChantier(Chantier):
             window=adresseChantier_entry,
         )
 
-        nomRespChantier_entry = Entry(root1, textvariable=nomRespChantier)
+        nomRespChantier_entry = Entry(root, textvariable=nomRespChantier)
         nomRespChantier_entry.config(highlightbackground='#eeeeee',
                                      foreground="#ff6815", background='#eeeeee')
         nomRespChantier_entry_canvas = canvas.create_window(
@@ -894,14 +894,16 @@ def Formulaire_MChantier(Chantier):
             320,
             anchor="nw",
             window=nomRespChantier_entry,)
-    root1.bind("<Button 1>", triangleClicked)
-    root1.bind("<Return>", enter_Tapped)
-    root1.bind('<KP_Enter>', enter_Tapped)
-    root1.resizable(0, 0)
-    root1.mainloop()
+    root.bind("<Button 1>", triangleClicked)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+
+
 def Formulaire_MVehicule(Vehicule):
-    root1 = tk.Toplevel(root)
-    root1.title("Modifier Vehicule")
+    root = tk.Toplevel(app)
+    root.title("Modifier Vehicule")
     image = Image.open(
         '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/Form.png')
 
@@ -928,7 +930,7 @@ def Formulaire_MVehicule(Vehicule):
         messagebox.showinfo("showinfo", "modification de " +
                             designationVehicule_entry.get()+" Reussis ")
 
-    root1.img = ImageTk.PhotoImage(resize_image)
+    root.img = ImageTk.PhotoImage(resize_image)
     global designationVehicule
     global typeVehicule
     global ptcVehicule
@@ -948,7 +950,7 @@ def Formulaire_MVehicule(Vehicule):
     ptvVehicule = StringVar()
 
     canvas = Canvas(
-        root1,
+        root,
         width=500,
         height=1000,
         bg="#2d5b6b",
@@ -961,16 +963,16 @@ def Formulaire_MVehicule(Vehicule):
     canvas.create_image(
         0,
         0,
-        image=root1.img,
+        image=root.img,
         anchor="nw"
 
     )
     if Vehicule != []:
         canvas.create_text(
-        80,
-        190,
-        text='Immatriculation :',
-        font=('HIND Light', 20),
+            80,
+            190,
+            text='Immatriculation :',
+            font=('HIND Light', 20),
         )
         canvas.create_text(
             80,
@@ -997,30 +999,31 @@ def Formulaire_MVehicule(Vehicule):
             font=('HIND Light', 20),
         )
         immatriculationVehicule_entry = Entry(
-            root1, textvariable=immatriculationVehicule)
-        immatriculationVehicule_entry.insert(END,Vehicule[2])
+            root, textvariable=immatriculationVehicule)
+        immatriculationVehicule_entry.insert(END, Vehicule[2])
         immatriculationVehicule_entry.config(highlightbackground='#eeeeee',
-                                            foreground="#ff6815", background='#eeeeee')
+                                             foreground="#ff6815", background='#eeeeee')
         immatriculationVehicule_entry_canvas = canvas.create_window(
             200,
             170,
             anchor="nw",
             window=immatriculationVehicule_entry,
         )
-        designationVehicule_entry = Entry(root1, textvariable=designationVehicule)
-        designationVehicule_entry.insert(END,Vehicule[1])
+        designationVehicule_entry = Entry(
+            root, textvariable=designationVehicule)
+        designationVehicule_entry.insert(END, Vehicule[1])
         designationVehicule_entry.config(highlightbackground='#eeeeee',
-                                        foreground="#ff6815", background='#eeeeee')
+                                         foreground="#ff6815", background='#eeeeee')
         designationVehicule_entry_canvas = canvas.create_window(
             200,
             220,
             anchor="nw",
             window=designationVehicule_entry,
         )
-        typeVehicule_entry = Entry(root1, textvariable=typeVehicule)
-        typeVehicule_entry.insert(END,Vehicule[3])
+        typeVehicule_entry = Entry(root, textvariable=typeVehicule)
+        typeVehicule_entry.insert(END, Vehicule[3])
         typeVehicule_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                  foreground="#ff6815", background='#eeeeee')
         typeVehicule_entry_canvas = canvas.create_window(
             200,
             270,
@@ -1028,34 +1031,34 @@ def Formulaire_MVehicule(Vehicule):
             window=typeVehicule_entry,
         )
 
-        ptcVehicule_entry = Entry(root1, textvariable=ptcVehicule)
-        ptcVehicule_entry.insert(END,Vehicule[4])
+        ptcVehicule_entry = Entry(root, textvariable=ptcVehicule)
+        ptcVehicule_entry.insert(END, Vehicule[4])
         ptcVehicule_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                 foreground="#ff6815", background='#eeeeee')
         ptcVehicule_entry_canvas = canvas.create_window(
             200,
             320,
             anchor="nw",
             window=ptcVehicule_entry,
         )
-        ptvVehicule_entry = Entry(root1, textvariable=ptvVehicule)
-        ptvVehicule_entry.insert(END,Vehicule[5])
+        ptvVehicule_entry = Entry(root, textvariable=ptvVehicule)
+        ptvVehicule_entry.insert(END, Vehicule[5])
         ptvVehicule_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                 foreground="#ff6815", background='#eeeeee')
         ptvVehicule_entry_canvas = canvas.create_window(
             200,
             370,
             anchor="nw",
             window=ptvVehicule_entry,
         )
-        
+
     else:
 
         canvas.create_text(
-        80,
-        190,
-        text='Immatriculation :',
-        font=('HIND Light', 20),
+            80,
+            190,
+            text='Immatriculation :',
+            font=('HIND Light', 20),
         )
         canvas.create_text(
             80,
@@ -1082,27 +1085,28 @@ def Formulaire_MVehicule(Vehicule):
             font=('HIND Light', 20),
         )
         immatriculationVehicule_entry = Entry(
-            root1, textvariable=immatriculationVehicule)
+            root, textvariable=immatriculationVehicule)
         immatriculationVehicule_entry.config(highlightbackground='#eeeeee',
-                                            foreground="#ff6815", background='#eeeeee')
+                                             foreground="#ff6815", background='#eeeeee')
         immatriculationVehicule_entry_canvas = canvas.create_window(
             200,
             170,
             anchor="nw",
             window=immatriculationVehicule_entry,
         )
-        designationVehicule_entry = Entry(root1, textvariable=designationVehicule)
+        designationVehicule_entry = Entry(
+            root, textvariable=designationVehicule)
         designationVehicule_entry.config(highlightbackground='#eeeeee',
-                                        foreground="#ff6815", background='#eeeeee')
+                                         foreground="#ff6815", background='#eeeeee')
         designationVehicule_entry_canvas = canvas.create_window(
             200,
             220,
             anchor="nw",
             window=designationVehicule_entry,
         )
-        typeVehicule_entry = Entry(root1, textvariable=typeVehicule)
+        typeVehicule_entry = Entry(root, textvariable=typeVehicule)
         typeVehicule_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                  foreground="#ff6815", background='#eeeeee')
         typeVehicule_entry_canvas = canvas.create_window(
             200,
             270,
@@ -1110,33 +1114,35 @@ def Formulaire_MVehicule(Vehicule):
             window=typeVehicule_entry,
         )
 
-        ptcVehicule_entry = Entry(root1, textvariable=ptcVehicule)
+        ptcVehicule_entry = Entry(root, textvariable=ptcVehicule)
         ptcVehicule_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                 foreground="#ff6815", background='#eeeeee')
         ptcVehicule_entry_canvas = canvas.create_window(
             200,
             320,
             anchor="nw",
             window=ptcVehicule_entry,
         )
-        ptvVehicule_entry = Entry(root1, textvariable=ptvVehicule)
+        ptvVehicule_entry = Entry(root, textvariable=ptvVehicule)
         ptvVehicule_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                 foreground="#ff6815", background='#eeeeee')
         ptvVehicule_entry_canvas = canvas.create_window(
             200,
             370,
             anchor="nw",
             window=ptvVehicule_entry,
         )
-        
-    root1.bind("<Button 1>", triangleClicked)
-    root1.bind("<Return>", enter_Tapped)
-    root1.bind('<KP_Enter>', enter_Tapped)
-    root1.resizable(0, 0)
-    root1.mainloop()
+
+    root.bind("<Button 1>", triangleClicked)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+
+
 def Formulaire_MRemorque(Remorque):
-    root1 = tk.Toplevel(root)
-    root1.title("Modifier Remorque")
+    root = tk.Toplevel(app)
+    root.title("Modifier Remorque")
     image = Image.open(
         '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/Form.png')
 
@@ -1163,7 +1169,7 @@ def Formulaire_MRemorque(Remorque):
         messagebox.showinfo("showinfo", "modification de " +
                             designationRemorque_entry.get()+" Reussis ")
 
-    root1.img = ImageTk.PhotoImage(resize_image)
+    root.img = ImageTk.PhotoImage(resize_image)
     global designationRemorque
     global typeRemorque
     global ptcRemorque
@@ -1183,7 +1189,7 @@ def Formulaire_MRemorque(Remorque):
     ptvRemorque = StringVar()
 
     canvas = Canvas(
-        root1,
+        root,
         width=500,
         height=1000,
         bg="#2d5b6b",
@@ -1196,16 +1202,16 @@ def Formulaire_MRemorque(Remorque):
     canvas.create_image(
         0,
         0,
-        image=root1.img,
+        image=root.img,
         anchor="nw"
 
     )
     if Remorque != []:
         canvas.create_text(
-        80,
-        190,
-        text='Immatriculation :',
-        font=('HIND Light', 20),
+            80,
+            190,
+            text='Immatriculation :',
+            font=('HIND Light', 20),
         )
         canvas.create_text(
             80,
@@ -1232,30 +1238,31 @@ def Formulaire_MRemorque(Remorque):
             font=('HIND Light', 20),
         )
         immatriculationRemorque_entry = Entry(
-            root1, textvariable=immatriculationRemorque)
-        immatriculationRemorque_entry.insert(END,Remorque[2])
+            root, textvariable=immatriculationRemorque)
+        immatriculationRemorque_entry.insert(END, Remorque[2])
         immatriculationRemorque_entry.config(highlightbackground='#eeeeee',
-                                            foreground="#ff6815", background='#eeeeee')
+                                             foreground="#ff6815", background='#eeeeee')
         immatriculationRemorque_entry_canvas = canvas.create_window(
             200,
             170,
             anchor="nw",
             window=immatriculationRemorque_entry,
         )
-        designationRemorque_entry = Entry(root1, textvariable=designationRemorque)
-        designationRemorque_entry.insert(END,Remorque[1])
+        designationRemorque_entry = Entry(
+            root, textvariable=designationRemorque)
+        designationRemorque_entry.insert(END, Remorque[1])
         designationRemorque_entry.config(highlightbackground='#eeeeee',
-                                        foreground="#ff6815", background='#eeeeee')
+                                         foreground="#ff6815", background='#eeeeee')
         designationRemorque_entry_canvas = canvas.create_window(
             200,
             220,
             anchor="nw",
             window=designationRemorque_entry,
         )
-        typeRemorque_entry = Entry(root1, textvariable=typeRemorque)
-        typeRemorque_entry.insert(END,Remorque[3])
+        typeRemorque_entry = Entry(root, textvariable=typeRemorque)
+        typeRemorque_entry.insert(END, Remorque[3])
         typeRemorque_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                  foreground="#ff6815", background='#eeeeee')
         typeRemorque_entry_canvas = canvas.create_window(
             200,
             270,
@@ -1263,34 +1270,34 @@ def Formulaire_MRemorque(Remorque):
             window=typeRemorque_entry,
         )
 
-        ptcRemorque_entry = Entry(root1, textvariable=ptcRemorque)
-        ptcRemorque_entry.insert(END,Remorque[4])
+        ptcRemorque_entry = Entry(root, textvariable=ptcRemorque)
+        ptcRemorque_entry.insert(END, Remorque[4])
         ptcRemorque_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                 foreground="#ff6815", background='#eeeeee')
         ptcRemorque_entry_canvas = canvas.create_window(
             200,
             320,
             anchor="nw",
             window=ptcRemorque_entry,
         )
-        ptvRemorque_entry = Entry(root1, textvariable=ptvRemorque)
-        ptvRemorque_entry.insert(END,Remorque[5])
+        ptvRemorque_entry = Entry(root, textvariable=ptvRemorque)
+        ptvRemorque_entry.insert(END, Remorque[5])
         ptvRemorque_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                 foreground="#ff6815", background='#eeeeee')
         ptvRemorque_entry_canvas = canvas.create_window(
             200,
             370,
             anchor="nw",
             window=ptvRemorque_entry,
         )
-        
+
     else:
 
         canvas.create_text(
-        80,
-        190,
-        text='Immatriculation :',
-        font=('HIND Light', 20),
+            80,
+            190,
+            text='Immatriculation :',
+            font=('HIND Light', 20),
         )
         canvas.create_text(
             80,
@@ -1317,27 +1324,28 @@ def Formulaire_MRemorque(Remorque):
             font=('HIND Light', 20),
         )
         immatriculationRemorque_entry = Entry(
-            root1, textvariable=immatriculationRemorque)
+            root, textvariable=immatriculationRemorque)
         immatriculationRemorque_entry.config(highlightbackground='#eeeeee',
-                                            foreground="#ff6815", background='#eeeeee')
+                                             foreground="#ff6815", background='#eeeeee')
         immatriculationRemorque_entry_canvas = canvas.create_window(
             200,
             170,
             anchor="nw",
             window=immatriculationRemorque_entry,
         )
-        designationRemorque_entry = Entry(root1, textvariable=designationRemorque)
+        designationRemorque_entry = Entry(
+            root, textvariable=designationRemorque)
         designationRemorque_entry.config(highlightbackground='#eeeeee',
-                                        foreground="#ff6815", background='#eeeeee')
+                                         foreground="#ff6815", background='#eeeeee')
         designationRemorque_entry_canvas = canvas.create_window(
             200,
             220,
             anchor="nw",
             window=designationRemorque_entry,
         )
-        typeRemorque_entry = Entry(root1, textvariable=typeRemorque)
+        typeRemorque_entry = Entry(root, textvariable=typeRemorque)
         typeRemorque_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                  foreground="#ff6815", background='#eeeeee')
         typeRemorque_entry_canvas = canvas.create_window(
             200,
             270,
@@ -1345,33 +1353,35 @@ def Formulaire_MRemorque(Remorque):
             window=typeRemorque_entry,
         )
 
-        ptcRemorque_entry = Entry(root1, textvariable=ptcRemorque)
+        ptcRemorque_entry = Entry(root, textvariable=ptcRemorque)
         ptcRemorque_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                 foreground="#ff6815", background='#eeeeee')
         ptcRemorque_entry_canvas = canvas.create_window(
             200,
             320,
             anchor="nw",
             window=ptcRemorque_entry,
         )
-        ptvRemorque_entry = Entry(root1, textvariable=ptvRemorque)
+        ptvRemorque_entry = Entry(root, textvariable=ptvRemorque)
         ptvRemorque_entry.config(highlightbackground='#eeeeee',
-                                foreground="#ff6815", background='#eeeeee')
+                                 foreground="#ff6815", background='#eeeeee')
         ptvRemorque_entry_canvas = canvas.create_window(
             200,
             370,
             anchor="nw",
             window=ptvRemorque_entry,
         )
-        
-    root1.bind("<Button 1>", triangleClicked)
-    root1.bind("<Return>", enter_Tapped)
-    root1.bind('<KP_Enter>', enter_Tapped)
-    root1.resizable(0, 0)
-    root1.mainloop()
+
+    root.bind("<Button 1>", triangleClicked)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+
+
 def Formulaire_MEngin(Engin):
-    root1 = tk.Toplevel(root)
-    root1.title("Modifier Remorque")
+    root = tk.Toplevel(app)
+    root.title("Modifier Engin")
     image = Image.open(
         '/Users/ikama/Desktop/Logistics_SOMAGEC/DATABASE/Form.png')
 
@@ -1392,13 +1402,13 @@ def Formulaire_MEngin(Engin):
 
     def edit():
 
-        modifier_remorque(designationEngin_entry.get(), poidsEngin_entry.get(
+        modifier_engin(designationEngin_entry.get(), poidsEngin_entry.get(
         ), codeEngin_entry.get())
 
         messagebox.showinfo("showinfo", "modification de " +
-                            designationRemorque_entry.get()+" Reussis ")
+                            designationEngin_entry.get()+" Reussis ")
 
-    root1.img = ImageTk.PhotoImage(resize_image)
+    root.img = ImageTk.PhotoImage(resize_image)
     global designationEngin
     global poidsEngin
     global codeEngin
@@ -1412,7 +1422,7 @@ def Formulaire_MEngin(Engin):
     codeEngin = StringVar()
 
     canvas = Canvas(
-        root1,
+        root,
         width=500,
         height=1000,
         bg="#2d5b6b",
@@ -1425,7 +1435,7 @@ def Formulaire_MEngin(Engin):
     canvas.create_image(
         0,
         0,
-        image=root1.img,
+        image=root.img,
         anchor="nw"
 
     )
@@ -1448,30 +1458,30 @@ def Formulaire_MEngin(Engin):
             text='Poids (Kg):',
             font=('HIND Light', 20),
         )
-        
+
         codeEngin_entry = Entry(
-            root1, textvariable=codeEngin)
-        codeEngin_entry.insert(END,Engin[0])
+            root, textvariable=codeEngin)
+        codeEngin_entry.insert(END, Engin[0])
         codeEngin_entry.config(highlightbackground='#eeeeee',
-                                            foreground="#ff6815", background='#eeeeee')
+                               foreground="#ff6815", background='#eeeeee')
         codeEngin_entry_canvas = canvas.create_window(
             200,
             170,
             anchor="nw",
             window=codeEngin_entry,
         )
-        designationEngin_entry = Entry(root1, textvariable=designationEngin)
-        designationEngin_entry.insert(END,Engin[1])
+        designationEngin_entry = Entry(root, textvariable=designationEngin)
+        designationEngin_entry.insert(END, Engin[1])
         designationEngin_entry.config(highlightbackground='#eeeeee',
-                                        foreground="#ff6815", background='#eeeeee')
+                                      foreground="#ff6815", background='#eeeeee')
         designationEngin_entry_canvas = canvas.create_window(
             200,
             220,
             anchor="nw",
             window=designationEngin_entry,
         )
-        poidsEngin_entry = Entry(root1, textvariable=poidsEngin)
-        poidsEngin_entry.insert(END,Engin[2])
+        poidsEngin_entry = Entry(root, textvariable=poidsEngin)
+        poidsEngin_entry.insert(END, Engin[2])
         poidsEngin_entry.config(highlightbackground='#eeeeee',
                                 foreground="#ff6815", background='#eeeeee')
         typeRemorque_entry_canvas = canvas.create_window(
@@ -1481,7 +1491,6 @@ def Formulaire_MEngin(Engin):
             window=poidsEngin_entry,
         )
 
-        
     else:
 
         canvas.create_text(
@@ -1502,29 +1511,29 @@ def Formulaire_MEngin(Engin):
             text='Poids (Kg):',
             font=('HIND Light', 20),
         )
-        
+
         codeEngin_entry = Entry(
-            root1, textvariable=codeEngin)
+            root, textvariable=codeEngin)
 
         codeEngin_entry.config(highlightbackground='#eeeeee',
-                                            foreground="#ff6815", background='#eeeeee')
+                               foreground="#ff6815", background='#eeeeee')
         codeEngin_entry_canvas = canvas.create_window(
             200,
             170,
             anchor="nw",
             window=codeEngin_entry,
         )
-        designationEngin_entry = Entry(root1, textvariable=designationEngin)
+        designationEngin_entry = Entry(root, textvariable=designationEngin)
 
         designationEngin_entry.config(highlightbackground='#eeeeee',
-                                        foreground="#ff6815", background='#eeeeee')
+                                      foreground="#ff6815", background='#eeeeee')
         designationEngin_entry_canvas = canvas.create_window(
             200,
             220,
             anchor="nw",
             window=designationEngin_entry,
         )
-        poidsEngin_entry = Entry(root1, textvariable=poidsEngin)
+        poidsEngin_entry = Entry(root, textvariable=poidsEngin)
 
         poidsEngin_entry.config(highlightbackground='#eeeeee',
                                 foreground="#ff6815", background='#eeeeee')
@@ -1535,11 +1544,13 @@ def Formulaire_MEngin(Engin):
             window=poidsEngin_entry,
         )
 
-    root1.bind("<Button 1>", triangleClicked)
-    root1.bind("<Return>", enter_Tapped)
-    root1.bind('<KP_Enter>', enter_Tapped)
-    root1.resizable(0, 0)
-    root1.mainloop()
+    root.bind("<Button 1>", triangleClicked)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+
+
 class Tableau_Donnees(tk.Frame):
     def __init__(self, parent):
         self.parents = parent
@@ -1620,7 +1631,7 @@ class Tableau_Donnees(tk.Frame):
             tab4, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11')
         button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
         button_Modifier = tk.Button(
-            tab4, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6',command=lambda:Formulaire_Engin(table4.GetSelected()))
+            tab4, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6', command=lambda: Formulaire_MEngin(table4.GetSelected()))
         button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
         button_Supprimer = tk.Button(
             tab4, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A', command=lambda: [delete_engin(1)])
