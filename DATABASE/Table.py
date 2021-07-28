@@ -9,16 +9,26 @@ class Table(tk.Frame):
         super().__init__(parent)
 
         self.table = ttk.Treeview(self, show="headings")
-        self.table.tag_configure('odd', background='#458093',foreground="white")
+        self.table.tag_configure('oddrow', background='#B0E7F4')
+        self.table.tag_configure('evenrow', background='white')
+        
+        # self.table.tag_configure('odd', background='#458093',foreground="white")
         self.table["columns"] = headings
         self.table["displaycolumns"] = headings
 
         for head in headings:
             self.table.heading(head, text=head, anchor=tk.CENTER)
             self.table.column(head, anchor=tk.CENTER)
-
+        a=0
         for row in rows:
-            self.table.insert('', tk.END, values=tuple(row),tags = ('odd',))
+            a+=1
+            if (a % 2) == 0:
+                self.table.insert('', tk.END, values=tuple(row),tags = ('evenrow',))
+            else:
+                self.table.insert('', tk.END, values=tuple(row),tags = ('oddrow',))
+
+            
+           
 
         scrolltabley = tk.Scrollbar(self, command=self.table.yview)
         scrolltablex = tk.Scrollbar(self, orient=tk.HORIZONTAL, command=self.table.xview)

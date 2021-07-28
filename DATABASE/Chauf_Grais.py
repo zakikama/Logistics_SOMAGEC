@@ -6,19 +6,19 @@ class chauf_grais:
         self.nom = "init"
         self.prenom="init"
         self.fonction="init"
-
+        self.statut="libre"
     def show_chauf_grais(self):
         print("matricule "+ self.matricule+" nom "+self.nom+" prenom "+self.prenom+" fonction "+ self.fonction)
 
 
     def sauvgarde_chauf_grais(self):
-        donnees = [ self.matricule, self.nom,self.prenom,self.fonction]
+        donnees = [ self.matricule, self.nom,self.prenom,self.fonction,self.statut]
         connexion = sqlite3.connect("my_database.db")
         curseur = connexion.cursor()
 
         
         curseur.execute('''
-            INSERT INTO Chauffeurs_Graisseurs(matricule,nom,prenom,fonction) VALUES (?,?,?,?)
+            INSERT INTO Chauffeurs_Graisseurs(matricule,nom,prenom,fonction,status) VALUES (?,?,?,?,?)
             ''', donnees)
         connexion.commit()
         print("sauvgarde chauf_grais reussi")
@@ -47,11 +47,30 @@ def get_table_Chauffeurs_Graisseurs():
             data = (row for row in cursor.fetchall())
             cursor.close()
         return data
+def get_matricule_Chauffeurs_Graisseurs_statut(statut):
+    don = [statut]
+    sql = '''SELECT matricule FROM Chauffeurs_Graisseurs  WHERE status = ?'''
+    data = ()
+    with sqlite3.connect('my_database.db') as connection:
+            cursor = connection.cursor()
+            data = [data[0] for data in cursor.execute(sql, don)]
+    return data
+
 def get_matricule_Chauffeurs_Graisseurs():
     data = ()
     with sqlite3.connect('my_database.db') as connection:
             cursor = connection.cursor()
             data = [data[0] for data in cursor.execute("SELECT matricule FROM Chauffeurs_Graisseurs")]
     return data
-
-
+def get_name_perso(mat):
+    don = [mat]
+    sql = '''SELECT nom,prenom FROM Chauffeurs_Graisseurs  WHERE matricule = ?'''
+    data = ()
+    with sqlite3.connect('my_database.db') as connection:
+            cursor = connection.cursor()
+            cursor.execute(sql, don)
+            data = (row for row in cursor.fetchall())
+            cursor.close()
+    return list(data)
+   
+# print(get_name_perso("118-41-2153")[0][0]+" "+get_name_perso("118-41-2153")[0][1])

@@ -57,3 +57,14 @@ class OrdreDeMission:
          for line in template:
             f.write(line)
             f.write('\n')
+
+def get_latest_ORDM():
+        data = ()
+        with sqlite3.connect('my_database.db') as connection:
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM Ordres_Mission ORDER BY code DESC LIMIT 1;")
+            data = (row for row in cursor.fetchall())
+        
+        return list(data)
+# print(get_latest_ORDM())
+# print(get_table_ORDM()[0][1])
