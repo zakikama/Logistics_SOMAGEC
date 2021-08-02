@@ -124,7 +124,7 @@ def register_user():
 
     donnees = [nom_info, prenom_info, type_info,
                matricule_info, create_bcrypt_hash(password_info)]
-    connexion = sqlite3.connect("my_database.db")
+    connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
     curseur = connexion.cursor()
 
     curseur.execute('''
@@ -143,7 +143,7 @@ def login_verify(M,P):
     password1 = P
     matricule_login_entry.delete(0, END)
     password_login_entry.delete(0, END)
-    connexion = sqlite3.connect("my_database.db")
+    connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
     curseur = connexion.cursor()
     donnees = [matricule1]
     curseur.execute("""SELECT matricule

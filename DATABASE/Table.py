@@ -38,6 +38,7 @@ class Table(tk.Frame):
         scrolltablex.pack(side=tk.BOTTOM, fill=tk.X)
         # self.table.bind("<Double-1>", self.GetSelected)
         self.table.pack(expand=tk.YES, fill=tk.BOTH)
+
     def GetSelected(self):
         cd=[]
         curItem = self.table.focus()

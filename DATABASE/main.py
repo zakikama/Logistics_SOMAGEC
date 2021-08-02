@@ -1,8 +1,8 @@
+
 from Imports import *
 ##############################
 #    Formulaire D'ajout      #
 ##############################
-
 
 def Formulaire_Personnels():
     root = tk.Toplevel(app)
@@ -32,7 +32,11 @@ def Formulaire_Personnels():
         c.sauvgarde_chauf_grais()
         messagebox.showinfo("showinfo", "Sauvgarde de " +
                             matricule_entry.get()+" Reussis ")
-
+        
+        nom_entry.delete(0,'end')
+        prenom_entry.delete(0,'end')
+        matricule_entry.delete(0,'end')
+        fonction_entry.delete(0,'end')
     root.img = ImageTk.PhotoImage(resize_image)
     global nom
     global prenom
@@ -166,7 +170,10 @@ def Formulaire_Chantier():
         c.sauvgarde_Chantier()
         messagebox.showinfo("showinfo", "Sauvgarde de " +
                             intituleChantier_entry.get()+" Reussis ")
-
+        intituleChantier_entry.delete(0,'end')
+        adresseChantier_entry.delete(0,'end')
+        villeChantier_entry.delete(0,'end')
+        nomRespChantier_entry.delete(0,'end')
     root.img = ImageTk.PhotoImage(resize_image)
     global intituleChantier
     global adresseChantier
@@ -317,7 +324,11 @@ def Formulaire_Vehicule():
         c.sauvgarde_Vehicule()
         messagebox.showinfo("showinfo", "Sauvgarde de " +
                             designationVehicule_entry.get()+" Reussis ")
-
+        designationVehicule_entry.delete(0,'end')
+        typeVehicule_entry.delete(0,'end')
+        immatriculationVehicule_entry.delete(0,'end')
+        ptcVehicule_entry.delete(0,'end')
+        ptvVehicule_entry.delete(0,'end')
     root.img = ImageTk.PhotoImage(resize_image)
 
     canvas = Canvas(
@@ -452,6 +463,11 @@ def Formulaire_Remorque():
         c.sauvgarde_Remorque()
         messagebox.showinfo("showinfo", "Sauvgarde de " +
                             designationRemorque_entry.get()+" Reussis ")
+        designationRemorque_entry.delete(0,'end')
+        typeRemorque_entry.delete(0,'end')
+        immatriculationRemorque_entry.delete(0,'end')
+        ptcRemorque_entry.delete(0,'end')
+        ptvRemorque_entry.delete(0,'end')
 
     root.img = ImageTk.PhotoImage(resize_image)
     global designationRemorque
@@ -603,7 +619,8 @@ def Formulaire_Engin():
         c.sauvgarde_Engin()
         messagebox.showinfo("showinfo", "Sauvgarde de " +
                             designationEngin_entry.get()+" Reussis ")
-
+        designationEngin_entry.delete(0,'end')
+        poidsEngin_entry.delete(0,'end')    
     root.img = ImageTk.PhotoImage(resize_image)
     global designationEngin
     global poidsEngin
@@ -702,6 +719,11 @@ def Formulaire_MChantier(Chantier):
 
         messagebox.showinfo("showinfo", "modification de " +
                             intituleChantier_entry.get()+" Reussis ")
+        codeChantier_entry.delete(0, 'end')
+        intituleChantier_entry.delete(0, 'end')
+        adresseChantier_entry.delete(0, 'end')
+        villeChantier_entry.delete(0, 'end')
+        nomRespChantier_entry.delete(0, 'end')               
 
     root.img = ImageTk.PhotoImage(resize_image)
     global intituleChantier
@@ -934,6 +956,11 @@ def Formulaire_MVehicule(Vehicule):
 
         messagebox.showinfo("showinfo", "modification de " +
                             designationVehicule_entry.get()+" Reussis ")
+        designationVehicule_entry.delete(0, 'end')
+        typeVehicule_entry.delete(0, 'end')
+        immatriculationVehicule_entry.delete(0, 'end')
+        ptcVehicule_entry.delete(0, 'end')
+        ptvVehicule_entry.delete(0, 'end')  
 
     root.img = ImageTk.PhotoImage(resize_image)
     global designationVehicule
@@ -1173,7 +1200,11 @@ def Formulaire_MRemorque(Remorque):
 
         messagebox.showinfo("showinfo", "modification de " +
                             designationRemorque_entry.get()+" Reussis ")
-
+        designationRemorque_entry.delete(0, 'end')
+        typeRemorque_entry.delete(0, 'end')
+        immatriculationRemorque_entry.delete(0, 'end')
+        ptcRemorque_entry.delete(0, 'end')
+        ptvRemorque_entry.delete(0, 'end')
     root.img = ImageTk.PhotoImage(resize_image)
     global designationRemorque
     global typeRemorque
@@ -1412,6 +1443,9 @@ def Formulaire_MEngin(Engin):
 
         messagebox.showinfo("showinfo", "modification de " +
                             designationEngin_entry.get()+" Reussis ")
+        designationEngin_entry.delete(0,'end')
+        poidsEngin_entry.delete(0,'end')
+        codeEngin_entry.delete(0,'end')
 
     root.img = ImageTk.PhotoImage(resize_image)
     global designationEngin
@@ -1582,7 +1616,8 @@ def Formulaire_MPersonnel(Personelle):
 
         messagebox.showinfo("showinfo", "modification de " +
                             MatriculePersonnel_entry.get()+" Reussis ")
-
+        fonctionPersonnel_entry.delete(0,'end')
+        MatriculePersonnel_entry.delete(0,'end')
     root.img = ImageTk.PhotoImage(resize_image)
     global fonctionPersonnel
     global MatriculePersonnel
@@ -2137,10 +2172,10 @@ def Formulaire_supp_Perso():
 
 
 def LogOut():
-    file = open('key.key', 'rb')
+    file = open('DATABASE/Assets/key.key', 'rb')
     key = file.read()
     file.close()
-    f = open('User_Log.json',)
+    f = open('DATABASE/Assets/User_Log.json',)
     data = json.load(f)
     print(data["user"])
     if data["Status"] == "C":
@@ -2149,21 +2184,21 @@ def LogOut():
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
         aDict = {"user": data["user"], "time ": dt_string, "Status": "D"}
         jsonString = json.dumps(aDict)
-        jsonFile = open("User_Log.json", "w")
+        jsonFile = open("DATABASE/Assets/User_Log.json", "w")
         jsonFile.write(jsonString)
         jsonFile.close()
-        with open('User_Log.json', 'rb') as f:
+        with open('DATABASE/Assets/User_Log.json', 'rb') as f:
             data_cry = f.read()
         fernet = Fernet(key)
         encrypted = fernet.encrypt(data_cry)
-        with open('User_Log.json', 'wb') as f:
+        with open('DATABASE/Assets/User_Log.json', 'wb') as f:
             f.write(encrypted)
         print("encryption succes")
         messagebox.showinfo("showinfo", "Déconnexion")
 
 
 def on_closing():
-    with open('User_Log.json', 'r') as r:
+    with open('DATABASE/Assets/User_Log.json', 'r') as r:
         try:
             j = json.load(r)
             LogOut()
@@ -2204,7 +2239,7 @@ def create_table(conn, create_table_sql):
 
 
 def intialiser_DATABASE():
-    database = "my_database.db"
+    database = "DATABASE/Assets/my_database.db"
     sql_create_User = """ CREATE TABLE IF NOT EXISTS Users(
                                         code integer PRIMARY KEY,
                                         nom text NOT NULL,
@@ -2315,16 +2350,9 @@ def Figure_Globale():
     figure.patch.set_facecolor('#456975')
     return figure
 
-
-
-
-
-
-
 ################################
 # Declaration de l application #
 ################################
-
 
 class SampleApp(tk.Tk):
 
@@ -2354,18 +2382,19 @@ class SampleApp(tk.Tk):
             frame.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame("StartPage")
+        
 
     def show_frame(self, page_name):
         '''Show a frame for the given page name'''
         frame = self.frames[page_name]
         frame.tkraise()
+        
 
 ######--------Dashboard-------########
-
-
 class HomePage(tk.Frame):
 
     def __init__(self, parent, controller):
+        
         tk.Frame.__init__(self, parent)
         self.controller = controller
         left_frame = tk.Frame(self, borderwidth=1, bg="#2d5b6b",
@@ -2379,7 +2408,7 @@ class HomePage(tk.Frame):
         MyFont = tkinter.font.Font(
             family="HIND Light", size=30)
         btn_H = tk.Button(container, text="Home", font=ButtonFont, highlightbackground="#2d5b6b", foreground="#F76515",
-                          command=lambda: controller.show_frame("HomePage"))
+                          command=lambda: my_gui.refresh_Dashboard(bottom_box))
         btn_H.pack(padx=20, fill="both", pady=20)
         btn_1 = tk.Button(container, text="Logistics", font=ButtonFont, highlightbackground="#2d5b6b",
                           command=lambda: controller.show_frame("LogisticsPage"))
@@ -2415,164 +2444,16 @@ class HomePage(tk.Frame):
         
         bottom_box = tk.Frame(right_frame, borderwidth=1,
                               bg="white", relief="solid")
+        
+        my_gui = Dashboard(bottom_box)
 
+        my_gui.pack( fill="both", expand=True)
+        # button_refresh = tk.Button(bottom_box, text="refresh",
+        #                            highlightbackground="#2d5b6b", command=lambda: my_gui.refresh_Dashboard(bottom_box))
 
-        Global_Frame01=tk.Frame(bottom_box,borderwidth = 0,
-                              bg = "#2d5b6b", relief = "flat")
-        Card01=tk.Frame(Global_Frame01,borderwidth = 0,
-                                    bg = "grey", relief = "flat")
-        canvas01= FigureCanvasTkAgg(figure_dispo_v(), master=Card01) 
-        canvas01.draw()
-        canvas01.get_tk_widget().pack()
-        Card01.pack(side=LEFT,expand=True,fill = "both", padx = 10, pady = 10)
-        Card01.pack_propagate(0)
-        Card02=tk.Frame(Global_Frame01,borderwidth = 0,
-                                    bg = "grey", relief = "flat")
-        canvas02= FigureCanvasTkAgg(figure_dispo_R(), master=Card02) 
-        canvas02.draw()
-        canvas02.get_tk_widget().pack()
-        Card02.pack(side=LEFT,expand = True, fill = "both", padx = 10, pady = 10)
-        Card02.pack_propagate(0)
-        Card03=tk.Frame(Global_Frame01,borderwidth = 0,
-                                    bg = "grey", relief = "flat")
-        canvas03= FigureCanvasTkAgg(figure_dispo_E(), master=Card03) 
-        canvas03.draw()
-        canvas03.get_tk_widget().pack()
-        Card03.pack(side=LEFT,expand = True, fill = "both", padx = 10, pady = 10)
-        Card03.pack_propagate(0)
-        Global_Frame01.pack(side=TOP,expand = True, fill = "both")
-        Global_Frame02=tk.Frame(bottom_box,borderwidth = 0,
-                                    bg = "#2d5b6b", relief = "flat")
-        Card11=tk.Frame(Global_Frame02,borderwidth = 2, width=380,
-                                    bg = "grey", relief = "flat")
-        canvas = Canvas(
-                    Card11,
-                    width=300,
-                    height=1000,
-                    bg="#456975",
-                    bd=0,
-                    highlightthickness=0
-                )
-        canvas.create_text(
-                    190,
-                    20,
-                    text="Latest ORDM",
-                    font=('HIND Light', 20),
-                    fill='white',
-                )
-        canvas.create_text(
-                    80,
-                    100,
-                    text="Chauffeur",
-                    fill='white',
-                    font=('HIND', 18),
-                )
-        canvas.create_text(
-                    300,
-                    100,
-                    text=get_latest_ORDM()[0][1],
-                    font=('HIND Light', 15),
-                )
-        canvas.create_text(
-                    200,
-                    100,
-                    text=get_name_perso(get_latest_ORDM()[0][1])[0][0]+" "+get_name_perso(get_latest_ORDM()[0][1])[0][1]          ,
-                    font=('HIND Light', 15),
-                )
-        canvas.create_text(
-                    80,
-                    140,
-                    text="Depart",
-                    fill='white',
-                    font=('HIND', 18),
-                )
-
-        canvas.create_text(
-                    200,
-                    140,
-                    text=get_latest_ORDM()[0][6]       ,
-                    font=('HIND Light', 15),
-                )
-
-        canvas.create_text(
-                    300,
-                    140,
-                    text=get_latest_ORDM()[0][7]       ,
-                    font=('HIND Light', 15),
-                )
-        canvas.create_text(
-                    80,
-                    180,
-                    text="Destination",
-                    fill='white',
-                    font=('HIND', 18),
-                )
-        canvas.create_text(
-                    255,
-                    180,
-                    text=get_latest_ORDM()[0][8]       ,
-                    font=('HIND Light', 15),
-                )
-        if get_latest_ORDM()[0][3] == "aucune":
-            imageV = Image.open("DATABASE/Assets/image/vehiculeR.png")
-        else:
-            imageV = Image.open("DATABASE/Assets/image/vehicule.png")
-        resize_imagev = imageV.resize((50, 40)) 
-        canvas.create_text(
-                    75,
-                    280,
-                    text=get_latest_ORDM()[0][3]       ,
-                    font=('HIND Light', 15),
-                )
-        self.photoV = ImageTk.PhotoImage(resize_imagev) 
-        canvas.create_image(50,220, anchor = 'nw', image=self.photoV)
-        if get_latest_ORDM()[0][5] == "aucune":
-            imageR = Image.open("DATABASE/Assets/image/remorqueR.png")
-        else:
-            imageR = Image.open("DATABASE/Assets/image/remorque.png")
-
-        resize_imageR = imageR.resize((70, 60)) 
-        canvas.create_text(
-                    185,
-                    280,
-                    text=get_latest_ORDM()[0][5]       ,
-                    font=('HIND Light', 15),
-                )
-        self.photoR = ImageTk.PhotoImage(resize_imageR) 
-        canvas.create_image(150,210, anchor = 'nw', image=self.photoR)
-        if get_latest_ORDM()[0][4] == "aucune":
-            imageE = Image.open("DATABASE/Assets/image/enginRo.png")
-        else:
-            imageE = Image.open("DATABASE/Assets/image/engin.png")
-
-        resize_imageE = imageE.resize((70, 60)) 
-        canvas.create_text(
-                    295,
-                    280,
-                    text=get_latest_ORDM()[0][4]       ,
-                    font=('HIND Light', 15),
-                )
-        self.photoE = ImageTk.PhotoImage(resize_imageE) 
-        canvas.create_image(260,210, anchor = 'nw', image=self.photoE)
-        canvas.pack(fill='both', expand=True)
-
-
-                # creat
-
-        Card11.pack(side=RIGHT,expand = True, fill = 'y', padx=10,pady = 10) 
-        Card11.pack_propagate(0)   
-        Card12=tk.Frame(Global_Frame02,borderwidth = 0, width=700,
-                                    bg = "black", relief = "flat")
-        canvas = FigureCanvasTkAgg(Figure_Globale(), master=Card12) 
-        canvas.draw()
-        canvas.get_tk_widget().pack(side=BOTTOM,expand = True,fill="both")
-        Card12.pack(side=RIGHT,expand = True, fill = 'y',padx=10, pady = 10)  
-
-
-        Card12.pack_propagate(0)
-        Global_Frame02.pack(side=BOTTOM,expand = True, fill = "both")
+        # button_refresh.pack(padx=10, pady=10, side='bottom')
         bottom_box.pack(expand=True, fill="both", padx=10, pady=10)
-
+        
 ######--------les donnees de la BDD-------########
 
 
@@ -2632,7 +2513,8 @@ class LogisticsPage(tk.Frame):
         bottom_box = tk.Frame(right_frame,
                               bg="#2d5b6b", relief="solid")
         my_gui = Tableau_Donnees(bottom_box)
-        my_gui.pack(pady=10, fill="both", expand=True)
+        my_gui.pack(fill="both", expand=True)
+        
         bottom_box.pack(expand=True, fill="both", padx=10, pady=10)
 
 ######--------Gestion Des Ordres de Mission-------########
@@ -2724,6 +2606,15 @@ class TraitmentPage(tk.Frame):
             Ord.NatureTrasport = NatureTrD.get()
             Ord.sauvgarde_Ordre()
             Ord.print_Ordre()
+            messagebox.showinfo("showinfo", "Sauvegarde Reussis ")
+            ChafeurD.set("aucun")
+            GraisseursD.set("aucun")
+            vehiculeD.set("aucun")
+            EnginD.set("aucun")
+            RemorqueD.set("aucune")
+            ChantierDD.set("aucun")
+            ChantierDA.set("aucun")
+            NatureTrD.set(OPTIONSN[2])
         bottom_box = tk.Frame(right_frame,
                               bg="#2d5b6b", relief="solid")
         # FORMULAIRE Ordre de Mission
@@ -2776,9 +2667,9 @@ class TraitmentPage(tk.Frame):
         label_dateDepart = Label(
             Ligne6, text="Entrer la date de depart : ", font=MyFontS, bg="#458093", foreground="white")
         label_dateDepart.pack(side='left', padx=50, pady=10)
-        dateDepart_entry = DateEntry(Ligne6, locale='de_DE')
+        dateDepart_entry = DateEntry(Ligne6, locale='fr_FR')
 
-        dateDepart_entry.pack(side='right', padx=50, pady=10)
+        dateDepart_entry.pack( padx=20, pady=10)
         dateDepart_entry._top_cal.overrideredirect(False)
         Ligne6.pack(expand=True, fill="both", pady=10)
 
@@ -2957,7 +2848,7 @@ class RegisterPage(tk.Frame):
             else:
                 donnees = [nom_info, prenom_info, type_info,
                            matricule_info, create_bcrypt_hash(password_info)]
-                connexion = sqlite3.connect("my_database.db")
+                connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
                 curseur = connexion.cursor()
                 curseur.execute('''
                     INSERT INTO Users(nom, prenom, type_user,  matricule, hash_pass) VALUES (?,?,?,?,?)
@@ -3138,12 +3029,72 @@ class Tableau_Donnees(tk.Frame):
         tab3 = tk.Frame(tabs, background="#2d5b6b")
         tab4 = tk.Frame(tabs, background="#2d5b6b")
         tab5 = tk.Frame(tabs, background="#2d5b6b")
+        imC = Image.open('DATABASE/Assets/image/chantier.png')
+        resize_imageC = imC.resize((24, 19))
+        self.phC = ImageTk.PhotoImage(resize_imageC)
+        imV = Image.open('DATABASE/Assets/image/vehicule.png')
+        resize_imageV = imV.resize((25, 20))
+        self.phV = ImageTk.PhotoImage(resize_imageV)
+        imR = Image.open('DATABASE/Assets/image/remorque.png')
+        resize_imageR = imR.resize((25, 20))
+        self.phR = ImageTk.PhotoImage(resize_imageR)
+        imE = Image.open('DATABASE/Assets/image/engin.png')
+        resize_imageE = imE.resize((25, 20))
+        self.phE = ImageTk.PhotoImage(resize_imageE)
+        imP = Image.open('DATABASE/Assets/image/personnel.png')
+        resize_imageP = imP.resize((25, 20))
+        self.phP = ImageTk.PhotoImage(resize_imageP)
+        tabs.add(tab1, text='Chantiers',image=self.phC,compound='left')
+        tabs.add(tab2, text='Vehicules',image=self.phV,compound='left')
+        tabs.add(tab3, text='Remorques',image=self.phR,compound='left')
+        tabs.add(tab4, text='Engins',image=self.phE,compound='left')
+        tabs.add(tab5, text='Personnel',image=self.phP,compound='left')
+        style = ttk.Style()
+        BG_COLOUR="#2d5b6b"
+        style.theme_create(
+            "name", parent="alt", settings = {
+                ".": {"configure": {"background": BG_COLOUR,
+                                    "foreground": "black",
+                                    "font": ("HIND", 12),
+                                    "relief": "flat"}},
+                "TLabel": {"configure": {"foreground": "white",
+                        "padding": 10
+                        }},
+                "TNotebook": {"configure": {"tabmargins": [2, 5, 2, 0]}
+                            },
+                "TNotebook.Tab": {
+                    "configure": {"relief" : "flat",
+                                "foreground": "white",
+                                "bordercolor" : BG_COLOUR,
+                                "darkcolor" : BG_COLOUR,
+                                "borderwifth":0,
+                                "lightcolor" : BG_COLOUR,
+                                "padding": [5, 1], "background": BG_COLOUR
+                                },
+                    "map": {"background": [("selected", "#456975")],
+                            "foreground": [("selected", "#ff6815")],
 
-        tabs.add(tab1, text='Chantiers')
-        tabs.add(tab2, text='Vehicules')
-        tabs.add(tab3, text='Remorques')
-        tabs.add(tab4, text='Engins')
-        tabs.add(tab5, text='Personnel')
+                            "expand": [("selected", [1, 1, 1, 0])]}},
+                "Treeview":{
+                    "configure":{
+                        
+                        "foreground":"#000000",
+                        "rowheight":20,
+                        "relief":"flat",
+                        "fieldbackground":"#E1E1E1"},
+                    "map": {"background": [("selected", BG_COLOUR)],
+                            "foreground": [("selected", "white")],
+                    }
+                },
+                "Treeview.Heading":{
+                    "configure":{
+                        "background":BG_COLOUR,
+                        "foreground":"white"
+                        }
+                }
+                
+            })
+        style.theme_use("name")
         ###################
         #    Chantiers    #
         ###################
@@ -3252,6 +3203,166 @@ class Tableau_Donnees(tk.Frame):
         print("Refreshed")
 
 ######--------Se connecter -------########
+class Dashboard(tk.Frame):
+    def __init__(self, parent):
+        self.parents = parent
+        tk.Frame.__init__(self, parent)
+        Global_Frame01=tk.Frame(self,borderwidth = 0,
+                              bg = "#2d5b6b", relief = "flat")
+        Card01=tk.Frame(Global_Frame01,borderwidth = 0,
+                                    bg = "grey", relief = "flat")
+        canvas01= FigureCanvasTkAgg(figure_dispo_v(), master=Card01) 
+        canvas01.draw()
+        canvas01.get_tk_widget().pack()
+        Card01.pack(side=LEFT,expand=True,fill = "both", padx = 10, pady = 10)
+        Card01.pack_propagate(0)
+        Card02=tk.Frame(Global_Frame01,borderwidth = 0,
+                                    bg = "grey", relief = "flat")
+        canvas02= FigureCanvasTkAgg(figure_dispo_R(), master=Card02) 
+        canvas02.draw()
+        canvas02.get_tk_widget().pack()
+        Card02.pack(side=LEFT,expand = True, fill = "both", padx = 10, pady = 10)
+        Card02.pack_propagate(0)
+        Card03=tk.Frame(Global_Frame01,borderwidth = 0,
+                                    bg = "grey", relief = "flat")
+        canvas03= FigureCanvasTkAgg(figure_dispo_E(), master=Card03) 
+        canvas03.draw()
+        canvas03.get_tk_widget().pack()
+        Card03.pack(side=LEFT,expand = True, fill = "both", padx = 10, pady = 10)
+        Card03.pack_propagate(0)
+        Global_Frame01.pack(side=TOP,expand = True, fill = "both")
+        Global_Frame02=tk.Frame(self,borderwidth = 0,
+                                    bg = "#2d5b6b", relief = "flat")
+        Card11=tk.Frame(Global_Frame02,borderwidth = 2, width=380,
+                                    bg = "grey", relief = "flat")
+        canvas = Canvas(
+                    Card11,
+                    width=300,
+                    height=1000,
+                    bg="#456975",
+                    bd=0,
+                    highlightthickness=0
+                )
+        canvas.create_text(
+                    190,
+                    20,
+                    text="Latest ORDM",
+                    font=('HIND Light', 20),
+                    fill='white',
+                )
+        canvas.create_text(
+                    80,
+                    100,
+                    text="Chauffeur",
+                    fill='white',
+                    font=('HIND', 18),
+                )
+        canvas.create_text(
+                    300,
+                    100,
+                    text=get_latest_ORDM()[0][1],
+                    font=('HIND Light', 15),
+                )
+        canvas.create_text(
+                    200,
+                    100,
+                    text=get_name_perso(get_latest_ORDM()[0][1])[0][0]+" "+get_name_perso(get_latest_ORDM()[0][1])[0][1]          ,
+                    font=('HIND Light', 15),
+                )
+        canvas.create_text(
+                    80,
+                    140,
+                    text="Depart",
+                    fill='white',
+                    font=('HIND', 18),
+                )
+
+        canvas.create_text(
+                    200,
+                    140,
+                    text=get_latest_ORDM()[0][6]       ,
+                    font=('HIND Light', 15),
+                )
+
+        canvas.create_text(
+                    300,
+                    140,
+                    text=get_latest_ORDM()[0][7]       ,
+                    font=('HIND Light', 15),
+                )
+        canvas.create_text(
+                    80,
+                    180,
+                    text="Destination",
+                    fill='white',
+                    font=('HIND', 18),
+                )
+        canvas.create_text(
+                    255,
+                    180,
+                    text=get_latest_ORDM()[0][8]       ,
+                    font=('HIND Light', 15),
+                )
+        if get_latest_ORDM()[0][3] == "aucune":
+            imageV = Image.open("DATABASE/Assets/image/vehiculeR.png")
+        else:
+            imageV = Image.open("DATABASE/Assets/image/vehicule.png")
+        resize_imagev = imageV.resize((50, 40)) 
+        canvas.create_text(
+                    75,
+                    280,
+                    text=get_latest_ORDM()[0][3]       ,
+                    font=('HIND Light', 15),
+                )
+        self.photoV = ImageTk.PhotoImage(resize_imagev) 
+        canvas.create_image(50,220, anchor = 'nw', image=self.photoV)
+        if get_latest_ORDM()[0][5] == "aucune":
+            imageR = Image.open("DATABASE/Assets/image/remorqueR.png")
+        else:
+            imageR = Image.open("DATABASE/Assets/image/remorque.png")
+
+        resize_imageR = imageR.resize((70, 60)) 
+        canvas.create_text(
+                    185,
+                    280,
+                    text=get_latest_ORDM()[0][5]       ,
+                    font=('HIND Light', 15),
+                )
+        self.photoR = ImageTk.PhotoImage(resize_imageR) 
+        canvas.create_image(150,210, anchor = 'nw', image=self.photoR)
+        if get_latest_ORDM()[0][4] == "aucun":
+            imageE = Image.open("DATABASE/Assets/image/enginRo.png")
+        else:
+            imageE = Image.open("DATABASE/Assets/image/engin.png")
+
+        resize_imageE = imageE.resize((70, 60)) 
+        canvas.create_text(
+                    295,
+                    280,
+                    text=get_latest_ORDM()[0][4]       ,
+                    font=('HIND Light', 15),
+                )
+        self.photoE = ImageTk.PhotoImage(resize_imageE) 
+        canvas.create_image(260,210, anchor = 'nw', image=self.photoE)
+        canvas.pack(fill='both', expand=True)
+
+        Card11.pack(side=RIGHT,expand = True, fill = 'y', padx=10,pady = 10) 
+        Card11.pack_propagate(0)   
+        Card12=tk.Frame(Global_Frame02,borderwidth = 0, width=700,
+                                    bg = "black", relief = "flat")
+        canvas = FigureCanvasTkAgg(Figure_Globale(), master=Card12) 
+        canvas.draw()
+        canvas.get_tk_widget().pack(side=BOTTOM,expand = True,fill="both")
+        
+        Card12.pack(side=RIGHT,expand = True, fill = 'y',padx=10, pady = 10) 
+        Card12.pack_propagate(0)
+        Global_Frame02.pack(side=BOTTOM,expand = True, fill = "both")
+    def refresh_Dashboard(self, rot):
+        self.destroy()
+        self.__init__(rot)
+        self.pack(fill="both", expand=True)
+        print("Refreshed")
+
 
 
 class LogIn(tk.Frame):
@@ -3382,7 +3493,7 @@ class LogIn(tk.Frame):
         def login_verify():
             matricule1 = matricule_verify.get()
             password1 = password_verify.get()
-            connexion = sqlite3.connect("my_database.db")
+            connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
             curseur = connexion.cursor()
             donnees = [matricule1]
             curseur.execute("""SELECT matricule
@@ -3394,14 +3505,14 @@ class LogIn(tk.Frame):
             result = curseur.fetchone()
             curseur.close()
             if result and verify_password(password1, result[1]):
-                file = open('key.key', 'rb')
+                file = open('DATABASE/Assets/key.key', 'rb')
                 key = file.read()
                 file.close()
-                with open('User_Log.json', 'rb') as f:
+                with open('DATABASE/Assets/User_Log.json', 'rb') as f:
                     encrypted = f.read()
                 fernet = Fernet(key)
                 decrypted = fernet.decrypt(encrypted)
-                with open('User_Log.json', 'wb') as f:
+                with open('DATABASE/Assets/User_Log.json', 'wb') as f:
                     f.write(decrypted)
 
                 print("decryption success")
@@ -3410,7 +3521,7 @@ class LogIn(tk.Frame):
                 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
                 aDict = {"user": result[0], "time ": dt_string, "Status": "C"}
                 jsonString = json.dumps(aDict)
-                jsonFile = open("User_Log.json", "w")
+                jsonFile = open("DATABASE/Assets/User_Log.json", "w")
                 jsonFile.write(jsonString)
                 jsonFile.close()
                 messagebox.showinfo("showinfo", "Connection Reussis")
@@ -3437,7 +3548,10 @@ if __name__ == "__main__":
     app.resizable(0, 0)
     ico = tk.Image(
         "photo", file="DATABASE/Assets/image/ico.png")
-
+   
     app.tk.call('wm', 'iconphoto', app._w, ico)
     app.protocol("WM_DELETE_WINDOW", on_closing)
+
+
+
     app.mainloop()

@@ -12,7 +12,7 @@ class engin:
 
     def sauvgarde_Engin(self):
         donnees = [ self.designationEngin, self.poidsEngin,self.statut]
-        connexion = sqlite3.connect("my_database.db")
+        connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
         curseur = connexion.cursor()
 
         
@@ -23,7 +23,7 @@ class engin:
         print("sauvgarde Engin reussi")
 def modifier_engin(designationnM, poidsM,code):
     don = [designationnM,poidsM,code]
-    connexion = sqlite3.connect("my_database.db")
+    connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
     curseur = connexion.cursor()
     sql = '''UPDATE Parc_Engin SET designation = ?, poids = ? WHERE code = ?'''
     curseur.execute(sql, don)
@@ -31,7 +31,7 @@ def modifier_engin(designationnM, poidsM,code):
     print("modification Engin reussi")
 def delete_engin(code):
     don = [code]
-    connexion = sqlite3.connect("my_database.db")
+    connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
     curseur = connexion.cursor()
     sql = '''DELETE FROM Parc_Engin  WHERE code = ?'''
     curseur.execute(sql, don)
@@ -40,20 +40,20 @@ def delete_engin(code):
 
 def get_table_Parc_Engin():
         data = ()
-        with sqlite3.connect('my_database.db') as connection:
+        with sqlite3.connect('DATABASE/Assets/my_database.db') as connection:
             cursor = connection.cursor()
             cursor.execute("SELECT * FROM Parc_Engin")
             data = (row for row in cursor.fetchall())
         return data
 def get_designation_Parc_Engin():
     data = ()
-    with sqlite3.connect('my_database.db') as connection:
+    with sqlite3.connect('DATABASE/Assets/my_database.db') as connection:
             cursor = connection.cursor()
             data = [data[0] for data in cursor.execute("SELECT designation FROM Parc_Engin")]
     return data
 def get_code_Parc_Engin():
     data = ()
-    with sqlite3.connect('my_database.db') as connection:
+    with sqlite3.connect('DATABASE/Assets/my_database.db') as connection:
             cursor = connection.cursor()
             data = [data[0] for data in cursor.execute("SELECT code FROM Parc_Engin")]
     return data
@@ -61,7 +61,7 @@ def get_code_Parc_Engin_statut(statut):
     don = [statut]
     sql = '''SELECT code FROM Parc_Vehicule  WHERE status = ?'''
     data = ()
-    with sqlite3.connect('my_database.db') as connection:
+    with sqlite3.connect('DATABASE/Assets/my_database.db') as connection:
             cursor = connection.cursor()
             data = [data[0] for data in cursor.execute(sql, don)]
     return data
@@ -69,7 +69,7 @@ def get_designation_Parc_Engin_statut(statut):
     don = [statut]
     sql = '''SELECT designation FROM Parc_Vehicule  WHERE status = ?'''
     data = ()
-    with sqlite3.connect('my_database.db') as connection:
+    with sqlite3.connect('DATABASE/Assets/my_database.db') as connection:
             cursor = connection.cursor()
             data = [data[0] for data in cursor.execute(sql, don)]
     return data

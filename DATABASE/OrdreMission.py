@@ -19,7 +19,7 @@ class OrdreDeMission:
     def sauvgarde_Ordre(self):
         donnees = [self.Chauffeur, self.Graisseur, self.vehicule, self.engin, self.remorque,
                    self.DateDepart, self.ChantierDepart, self.ChantierArrivee, self.NatureTrasport]
-        connexion = sqlite3.connect("my_database.db")
+        connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
         curseur = connexion.cursor()
         curseur.execute('''
             INSERT INTO Ordres_Mission(Chauffeur,Graisseur, vehicule,engin,remorque,DateDepart,ChantierDepart,ChantierArrivee,NatureTrasport) VALUES (?,?,?,?,?,?,?,?,?)
@@ -28,7 +28,7 @@ class OrdreDeMission:
         print("sauvgarde Ordre Mission reussi")
 
     def print_Ordre(self):
-        f = open('User_Log.json',)
+        f = open('DATABASE/Assets/User_Log.json',)
         data = json.load(f)
         User_ = data["user"]
         now = datetime.now()
@@ -53,14 +53,14 @@ class OrdreDeMission:
                     "Chantier d'arrivee : ///////////////////////////////// "+self.ChantierArrivee,
                     "Nature du transport: ///////////////////////////////// "+self.NatureTrasport,
                     "#####################################################################################"]
-        with open('OrdreDeMission.txt', 'w') as f:
+        with open('DATABASE/Assets/Out_Data/OrdreDeMission.txt', 'w') as f:
          for line in template:
             f.write(line)
             f.write('\n')
 
 def get_latest_ORDM():
         data = ()
-        with sqlite3.connect('my_database.db') as connection:
+        with sqlite3.connect('DATABASE/Assets/my_database.db') as connection:
             cursor = connection.cursor()
             cursor.execute("SELECT * FROM Ordres_Mission ORDER BY code DESC LIMIT 1;")
             data = (row for row in cursor.fetchall())

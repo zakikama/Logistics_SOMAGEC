@@ -15,7 +15,7 @@ class vehicule:
 
     def sauvgarde_Vehicule(self):
         donnees = [ self.designationVehicule, self.immatriculationVehicule, self.typeVehicule, self.ptcVehicule, self.ptvVehicule,self.statut]
-        connexion = sqlite3.connect("my_database.db")
+        connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
         curseur = connexion.cursor()
 
         
@@ -26,7 +26,7 @@ class vehicule:
         print("sauvgarde Vehicule reussi")
 def modifier_vehicule(designationnM, typeM, ptcM,ptvM,Mat):
     don = [designationnM,typeM,ptcM,ptvM,Mat]
-    connexion = sqlite3.connect("my_database.db")
+    connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
     curseur = connexion.cursor()
     sql = '''UPDATE Parc_Vehicule SET designation = ?, type = ?,ptc = ?,ptv = ? WHERE immatriculation = ?'''
     curseur.execute(sql, don)
@@ -35,7 +35,7 @@ def modifier_vehicule(designationnM, typeM, ptcM,ptvM,Mat):
 
 def delete_Vehicule(matricule):
     don = [matricule]
-    connexion = sqlite3.connect("my_database.db")
+    connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
     curseur = connexion.cursor()
     sql = '''DELETE FROM Parc_Vehicule  WHERE  immatriculation = ?'''
     curseur.execute(sql, don)
@@ -45,14 +45,14 @@ def delete_Vehicule(matricule):
 
 def get_table_Parc_Vehicule():
         data = ()
-        with sqlite3.connect('my_database.db') as connection:
+        with sqlite3.connect('DATABASE/Assets/my_database.db') as connection:
             cursor = connection.cursor()
             cursor.execute("SELECT * FROM Parc_Vehicule")
             data = (row for row in cursor.fetchall())
         return data
 def get_matricule_Parc_Vehicule():
     data = ()
-    with sqlite3.connect('my_database.db') as connection:
+    with sqlite3.connect('DATABASE/Assets/my_database.db') as connection:
             cursor = connection.cursor()
             data = [data[0] for data in cursor.execute("SELECT immatriculation FROM Parc_Vehicule")]
     return data
@@ -60,7 +60,7 @@ def get_matricule_Parc_Vehicule_statut(statut):
     don = [statut]
     sql = '''SELECT immatriculation FROM Parc_Vehicule  WHERE status = ?'''
     data = ()
-    with sqlite3.connect('my_database.db') as connection:
+    with sqlite3.connect('DATABASE/Assets/my_database.db') as connection:
             cursor = connection.cursor()
             data = [data[0] for data in cursor.execute(sql, don)]
     return data
