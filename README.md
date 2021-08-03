@@ -141,6 +141,6 @@ Project Link: [https://github.com/zakikama/Logistics_SOMAGEC](https://github.com
 [issues-shield]: https://img.shields.io/github/issues/zakikama/repo.svg?style=for-the-badge
 [issues-url]: https://github.com/zakikama/repo/issues
 [license-shield]: https://img.shields.io/github/license/zakikama/repo.svg?style=for-the-badge
-[license-url]: https://github.com/zakikama/repo/blob/master/LICENSE.md
+[license-url]: https://github.com/zakikama/Logistics_SOMAGEC/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/zakaria-ikama-319aa218a
