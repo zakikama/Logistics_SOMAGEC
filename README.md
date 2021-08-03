@@ -1,5 +1,5 @@
 
-[![MIT License][license-shield]]
+
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
