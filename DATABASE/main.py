@@ -1,8 +1,10 @@
 
 from Imports import *
+
 ##############################
 #    Formulaire D'ajout      #
 ##############################
+UserType="DEFAULT"
 
 def Formulaire_Personnels():
     root = tk.Toplevel(app)
@@ -1724,9 +1726,8 @@ def Formulaire_MPersonnel(Personelle):
     root.resizable(0, 0)
     root.mainloop()
 ##############################
-# Formulaire De modification #
+#  Formulaire De Supression  #
 ##############################
-
 
 def Formulaire_supp_Chantier():
     root = tk.Toplevel(app)
@@ -2167,10 +2168,97 @@ def Formulaire_supp_Perso():
     root.resizable(0, 0)
     root.mainloop()
 ##############################
+#  Formulaire De Supression  #
+##############################
+def Formulaire_find_Chantier():
+    root = tk.Toplevel(app)
+    root.title("Chercher Chantier")
+    image = Image.open(
+        'DATABASE/Assets/image/SmallForm.png')
+
+    # Reszie the image using resize() method
+    resize_image = image.resize((500, 200))
+
+    def enter_Tapped(event):
+        save()
+
+    def save():
+       table1.select(code_entry.get())
+
+
+    root.img = ImageTk.PhotoImage(resize_image)
+    code = StringVar()
+    canvas = Canvas(
+        root,
+        width=500,
+        height=200,
+        bg="#2d5b6b",
+        bd=0,
+        highlightthickness=0
+    )
+
+    canvas.pack(fill='both', expand=True)
+
+    canvas.create_image(
+        0,
+        0,
+        image=root.img,
+        anchor="nw"
+
+    )
+    canvas.create_text(
+        120,
+        100,
+        text='Code :',
+        font=('HIND Light', 20),
+    )
+
+    code_Liste = get_code_Chantier()
+    code_entry = ttk.Combobox(root, textvariable=code)
+    code_entry['values'] = code_Liste
+    code_entry['state'] = 'normal'  # normal
+
+    code_entry_canvas = canvas.create_window(
+        170,
+        90,
+        anchor="nw",
+        window=code_entry,
+    )
+    btn_LogIn = Button(
+        root,
+        text='SEARCH',
+        command=lambda: save(),
+        width=10,
+        height=1,
+        highlightthickness=0,
+        borderwidth=0,
+        bd=0,
+        highlightbackground="#eeeeee",
+        foreground="#FF5733",
+        font=('HIND Light', 18)
+    )
+    btn_LogIn_canvas = canvas.create_window(
+        390,
+        160,
+        anchor="nw",
+        window=btn_LogIn,
+    )
+    # code_entry.bind('<<ComboboxSelected>>',enter_Tapped)
+    root.bind("<Return>", enter_Tapped)
+    root.bind('<KP_Enter>', enter_Tapped)
+    root.resizable(0, 0)
+    root.mainloop()
+
+def Noaccess():
+    messagebox.showwarning("showwarning", "Permission Denied")
+
+
+##############################
 #   Gestion d'utilisateur    #
 ##############################
 
 
+    
 def LogOut():
     file = open('DATABASE/Assets/key.key', 'rb')
     key = file.read()
@@ -2213,7 +2301,8 @@ def on_closing():
 #  initialisation de la BDD  #
 ##############################
 
-
+def mdp_oubliee():
+     messagebox.showinfo("showinfo", "contactez le service technique")
 def create_connection(db_file):
     """ create a database connection to a SQLite database """
     conn = None
@@ -2371,7 +2460,7 @@ class SampleApp(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (HomePage, LogisticsPage, TraitmentPage, StartPage, RegisterPage, LogIn):
+        for F in (StartPage,LogIn,RegisterPage,HomePage, LogisticsPage, TraitmentPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -2742,7 +2831,7 @@ class StartPage(tk.Frame):
         )
         bt_3 = Button(	self,
                        text='Mot de passe oublié',
-
+                       command=lambda: mdp_oubliee(),
                        width=20,
                        height=2,
                        highlightthickness=0,
@@ -3020,6 +3109,7 @@ class RegisterPage(tk.Frame):
 
 
 class Tableau_Donnees(tk.Frame):
+
     def __init__(self, parent):
         self.parents = parent
         tk.Frame.__init__(self, parent)
@@ -3051,53 +3141,56 @@ class Tableau_Donnees(tk.Frame):
         tabs.add(tab5, text='Personnel',image=self.phP,compound='left')
         style = ttk.Style()
         BG_COLOUR="#2d5b6b"
-        style.theme_create(
-            "name", parent="alt", settings = {
-                ".": {"configure": {"background": BG_COLOUR,
-                                    "foreground": "black",
-                                    "font": ("HIND", 12),
-                                    "relief": "flat"}},
-                "TLabel": {"configure": {"foreground": "white",
-                        "padding": 10
-                        }},
-                "TNotebook": {"configure": {"tabmargins": [2, 5, 2, 0]}
-                            },
-                "TNotebook.Tab": {
-                    "configure": {"relief" : "flat",
-                                "foreground": "white",
-                                "bordercolor" : BG_COLOUR,
-                                "darkcolor" : BG_COLOUR,
-                                "borderwifth":0,
-                                "lightcolor" : BG_COLOUR,
-                                "padding": [5, 1], "background": BG_COLOUR
+        try:
+            style.theme_create(
+                "name", parent="alt", settings = {
+                    ".": {"configure": {"background": BG_COLOUR,
+                                        "foreground": "black",
+                                        "font": ("HIND", 12),
+                                        "relief": "flat"}},
+                    "TLabel": {"configure": {"foreground": "white",
+                            "padding": 10
+                            }},
+                    "TNotebook": {"configure": {"tabmargins": [2, 5, 2, 0]}
                                 },
-                    "map": {"background": [("selected", "#456975")],
-                            "foreground": [("selected", "#ff6815")],
+                    "TNotebook.Tab": {
+                        "configure": {"relief" : "flat",
+                                    "foreground": "white",
+                                    "bordercolor" : BG_COLOUR,
+                                    "darkcolor" : BG_COLOUR,
+                                    "borderwifth":0,
+                                    "lightcolor" : BG_COLOUR,
+                                    "padding": [5, 1], "background": BG_COLOUR
+                                    },
+                        "map": {"background": [("selected", "#456975")],
+                                "foreground": [("selected", "#ff6815")],
 
-                            "expand": [("selected", [1, 1, 1, 0])]}},
-                "Treeview":{
-                    "configure":{
-                        
-                        "foreground":"#000000",
-                        "rowheight":20,
-                        "relief":"flat",
-                        "fieldbackground":"#E1E1E1"},
-                    "map": {"background": [("selected", BG_COLOUR)],
-                            "foreground": [("selected", "white")],
-                    }
-                },
-                "Treeview.Heading":{
-                    "configure":{
-                        "background":BG_COLOUR,
-                        "foreground":"white"
+                                "expand": [("selected", [1, 1, 1, 0])]}},
+                    "Treeview":{
+                        "configure":{
+                            
+                            "foreground":"#000000",
+                            "rowheight":20,
+                            "relief":"flat",
+                            "fieldbackground":"#E1E1E1"},
+                        "map": {"background": [("selected", BG_COLOUR)],
+                                "foreground": [("selected", "white")],
                         }
-                }
-                
-            })
-        style.theme_use("name")
+                    },
+                    "Treeview.Heading":{
+                        "configure":{
+                            "background":BG_COLOUR,
+                            "foreground":"white"
+                            }
+                    }
+                })
+            style.theme_use("name")
+        except:
+            style.theme_use("name")
         ###################
         #    Chantiers    #
         ###################
+        global table1
         table1 = Table(tab1, headings=('code', 'intitule', 'adresse',
                                        'ville', 'nom responsable'), rows=get_table_Chantier())
 
@@ -3105,35 +3198,42 @@ class Tableau_Donnees(tk.Frame):
 
         ButtonFont = tkinter.font.Font(
             family='HIND Light', size=16)
-
-        button_Ajouter = tk.Button(
-            tab1, text="Ajouter", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#189E11', command=lambda: Formulaire_Chantier())
-        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Modifier = tk.Button(
-            tab1, text="Modifier", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#0E4ED6', command=lambda: Formulaire_MChantier(table1.GetSelected()))
-        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Supprimer = tk.Button(
-            tab1, text="Supprimer", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#D60A0A', command=lambda: Formulaire_supp_Chantier())
-        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
+        if UserType=="ADMIN":
+            button_Ajouter = tk.Button(
+                tab1, text="Ajouter", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#189E11', command=lambda: Formulaire_Chantier())
+            button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
+            button_Modifier = tk.Button(
+                tab1, text="Modifier", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#0E4ED6', command=lambda: Formulaire_MChantier(table1.GetSelected()))
+            
+            button_Modifier = tk.Button(
+                tab1, text="Modifier", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#0E4ED6', command=lambda: Formulaire_MChantier(table1.GetSelected()))       
+            button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
+            button_Find = tk.Button(
+                tab1, text="Find", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#189E11', command=lambda: Formulaire_find_Chantier())
+            button_Find.pack(padx=10, pady=10, side=tk.LEFT)
+            button_Supprimer = tk.Button(
+                tab1, text="Supprimer", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#D60A0A', command=lambda: Formulaire_supp_Chantier())
+            button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
         button_refresh = tk.Button(tab1, text="refresh", font=ButtonFont,
                                    highlightbackground="#2d5b6b", command=lambda: self.refresh_table(self.parents))
         button_refresh.pack(padx=10, pady=10, side=tk.RIGHT)
+        
         ###################
         #    Vehicules    #
         ###################
         table2 = Table(tab2, headings=('code', 'designation', 'immatriculation',
                                        'type', 'ptc', 'ptv'), rows=get_table_Parc_Vehicule())
         table2.pack(expand=tk.YES, fill=tk.BOTH)
-
-        button_Ajouter = tk.Button(
-            tab2, text="Ajouter", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#189E11', command=lambda: Formulaire_Vehicule())
-        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Modifier = tk.Button(
-            tab2, text="Modifier", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#0E4ED6', command=lambda: Formulaire_MVehicule(table2.GetSelected()))
-        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Supprimer = tk.Button(
-            tab2, text="Supprimer", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#D60A0A', command=lambda: Formulaire_supp_Vehicule())
-        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
+        if UserType=="ADMIN":
+            button_Ajouter = tk.Button(
+                tab2, text="Ajouter", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#189E11', command=lambda: Formulaire_Vehicule())
+            button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
+            button_Modifier = tk.Button(
+                tab2, text="Modifier", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#0E4ED6', command=lambda: Formulaire_MVehicule(table2.GetSelected()))
+            button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
+            button_Supprimer = tk.Button(
+                tab2, text="Supprimer", highlightbackground="#2d5b6b", font=ButtonFont, foreground='#D60A0A', command=lambda: Formulaire_supp_Vehicule())
+            button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
         button_refresh = tk.Button(
             tab2, text="refresh", highlightbackground="#2d5b6b", font=ButtonFont, command=lambda: self.refresh_table(self.parents))
         button_refresh.pack(padx=10, pady=10, side=tk.RIGHT)
@@ -3143,16 +3243,16 @@ class Tableau_Donnees(tk.Frame):
         table3 = Table(tab3, headings=('code', 'designation', 'immatriculation',
                                        'type', 'ptc', 'ptv'), rows=get_table_Parc_Remorque())
         table3.pack(expand=tk.YES, fill=tk.BOTH)
-
-        button_Ajouter = tk.Button(
-            tab3, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11', command=lambda: Formulaire_Remorque())
-        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Modifier = tk.Button(
-            tab3, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6', command=lambda: Formulaire_MRemorque(table3.GetSelected()))
-        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Supprimer = tk.Button(
-            tab3, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A', command=lambda: Formulaire_supp_Remorque())
-        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
+        if UserType=="ADMIN":
+            button_Ajouter = tk.Button(
+                tab3, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11', command=lambda: Formulaire_Remorque())
+            button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
+            button_Modifier = tk.Button(
+                tab3, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6', command=lambda: Formulaire_MRemorque(table3.GetSelected()))
+            button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
+            button_Supprimer = tk.Button(
+                tab3, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A', command=lambda: Formulaire_supp_Remorque())
+            button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
         button_refresh = tk.Button(tab3, text="refresh", font=ButtonFont,
                                    highlightbackground="#2d5b6b", command=lambda: self.refresh_table(self.parents))
         button_refresh.pack(padx=10, pady=10, side=tk.RIGHT)
@@ -3162,16 +3262,16 @@ class Tableau_Donnees(tk.Frame):
         table4 = Table(tab4, headings=('code', 'designation',
                                        'poids'), rows=get_table_Parc_Engin())
         table4.pack(expand=tk.YES, fill=tk.BOTH)
-
-        button_Ajouter = tk.Button(
-            tab4, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11', command=lambda: Formulaire_Engin())
-        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Modifier = tk.Button(
-            tab4, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6', command=lambda: Formulaire_MEngin(table4.GetSelected()))
-        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Supprimer = tk.Button(
-            tab4, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A', command=lambda: Formulaire_supp_Engin())
-        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
+        if UserType=="ADMIN":
+            button_Ajouter = tk.Button(
+                tab4, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11', command=lambda: Formulaire_Engin())
+            button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
+            button_Modifier = tk.Button(
+                tab4, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6', command=lambda: Formulaire_MEngin(table4.GetSelected()))
+            button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
+            button_Supprimer = tk.Button(
+                tab4, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A', command=lambda: Formulaire_supp_Engin())
+            button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
         button_refresh = tk.Button(tab4, text="refresh", font=ButtonFont,
                                    highlightbackground="#2d5b6b", command=lambda: self.refresh_table(self.parents))
         button_refresh.pack(padx=10, pady=10, side=tk.RIGHT)
@@ -3181,16 +3281,16 @@ class Tableau_Donnees(tk.Frame):
         table5 = Table(tab5, headings=('matricule', 'nom', 'prenom',
                                        'fonction'), rows=get_table_Chauffeurs_Graisseurs())
         table5.pack(expand=tk.YES, fill=tk.BOTH)
-
-        button_Ajouter = tk.Button(
-            tab5, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11', command=lambda: Formulaire_Personnels())
-        button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Modifier = tk.Button(
-            tab5, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6', command=lambda: Formulaire_MPersonnel(table5.GetSelected()))
-        button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
-        button_Supprimer = tk.Button(
-            tab5, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A', command=lambda: Formulaire_supp_Perso())
-        button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
+        if UserType=="ADMIN":
+            button_Ajouter = tk.Button(
+                tab5, text="Ajouter", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#189E11', command=lambda: Formulaire_Personnels())
+            button_Ajouter.pack(padx=10, pady=10, side=tk.LEFT)
+            button_Modifier = tk.Button(
+                tab5, text="Modifier", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#0E4ED6', command=lambda: Formulaire_MPersonnel(table5.GetSelected()))
+            button_Modifier.pack(padx=10, pady=10, side=tk.LEFT)
+            button_Supprimer = tk.Button(
+                tab5, text="Supprimer", font=ButtonFont, highlightbackground="#2d5b6b", foreground='#D60A0A', command=lambda: Formulaire_supp_Perso())
+            button_Supprimer.pack(padx=10, pady=10, side=tk.LEFT)
         button_refresh = tk.Button(tab5, text="refresh", font=ButtonFont,
                                    highlightbackground="#2d5b6b", command=lambda: self.refresh_table(self.parents))
         button_refresh.pack(padx=10, pady=10, side=tk.RIGHT)
@@ -3201,7 +3301,9 @@ class Tableau_Donnees(tk.Frame):
         self.__init__(rot)
         self.pack(pady=10, fill="both", expand=True)
         print("Refreshed")
-
+    def select_item(self,code):
+        self.SelectItem(code)
+        print("selected")
 ######--------Se connecter -------########
 class Dashboard(tk.Frame):
     def __init__(self, parent):
@@ -3363,14 +3465,13 @@ class Dashboard(tk.Frame):
         self.pack(fill="both", expand=True)
         print("Refreshed")
 
-
-
 class LogIn(tk.Frame):
+    
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         global matricule_verify
         global password_verify
-
+        
         matricule_verify = StringVar()
         password_verify = StringVar()
 
@@ -3489,15 +3590,15 @@ class LogIn(tk.Frame):
             anchor="nw",
             window=btn_NoAcc,
         )
-
         def login_verify():
+            global UserType
             matricule1 = matricule_verify.get()
             password1 = password_verify.get()
             connexion = sqlite3.connect("DATABASE/Assets/my_database.db")
             curseur = connexion.cursor()
             donnees = [matricule1]
             curseur.execute("""SELECT matricule
-                                ,hash_pass
+                                ,hash_pass,type_user
                         FROM Users
                         WHERE matricule=?
                             """,
@@ -3514,12 +3615,12 @@ class LogIn(tk.Frame):
                 decrypted = fernet.decrypt(encrypted)
                 with open('DATABASE/Assets/User_Log.json', 'wb') as f:
                     f.write(decrypted)
-
                 print("decryption success")
                 print("LogIn succes")
                 now = datetime.now()
                 dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-                aDict = {"user": result[0], "time ": dt_string, "Status": "C"}
+                UserType=result[2]
+                aDict = {"type": result[2],"user": result[0], "time ": dt_string, "Status": "C"}
                 jsonString = json.dumps(aDict)
                 jsonFile = open("DATABASE/Assets/User_Log.json", "w")
                 jsonFile.write(jsonString)
@@ -3528,12 +3629,15 @@ class LogIn(tk.Frame):
                 controller.show_frame("HomePage")
                 print("succes")
 
+
             else:
                 messagebox.showwarning(
                     "showwarning", "Matricule ou Mot de passe incorrecte")
                 password_login_entry.delete(0, END)
                 matricule_login_entry.delete(0, END)
                 print("failed")
+              
+                
 
 
 if __name__ == "__main__":
@@ -3548,10 +3652,10 @@ if __name__ == "__main__":
     app.resizable(0, 0)
     ico = tk.Image(
         "photo", file="DATABASE/Assets/image/ico.png")
-   
+
     app.tk.call('wm', 'iconphoto', app._w, ico)
     app.protocol("WM_DELETE_WINDOW", on_closing)
 
-
+    app.title("logistics SOMAGEC")
 
     app.mainloop()

@@ -38,7 +38,14 @@ class Table(tk.Frame):
         scrolltablex.pack(side=tk.BOTTOM, fill=tk.X)
         # self.table.bind("<Double-1>", self.GetSelected)
         self.table.pack(expand=tk.YES, fill=tk.BOTH)
-
+    def select(self,code_):
+        self.selections = [] #list of ids of matching tree entries
+        for i in range(len(self.table.heading("code"))):
+            #the below if check checks if the value of the entry matches the first characters of each element
+            #in the names list up to the length of the value of the entry widget
+            if code_ != "" and code_ == self.table.heading[0][i] :
+                self.selections.append(self.ids[i]) #if it matches it appends the id to the selections list
+        self.tree.selection_set(self.selections)
     def GetSelected(self):
         cd=[]
         curItem = self.table.focus()
