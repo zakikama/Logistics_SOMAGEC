@@ -8,10 +8,10 @@
 <br />
 <p align="center">
   <a href="https://github.com/zakikama/Logistics_SOMAGEC">
-    <img src="DATABASE/Assets/image/logo.png" alt="Logo" width="80" height="80">
+    <img src="DATABASE/Assets/image/ico.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">project_title</h3>
+  <h3 align="center">Logistics SOMAGEC</h3>
     Logistics HANDLER
   <p align="center">
     As part of my end of year internship, I was assigned a task to develop a desktop application with the sole purpose of managing the company logistics and browse the database
@@ -125,7 +125,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@email](zakaria2ikama@gmail.com) - email
+IKAMA Zakaria - [zakaria2ikama@gmail.com](zakaria2ikama@gmail.com) - email
 
 Project Link: [https://github.com/zakikama/Logistics_SOMAGEC](https://github.com/zakikama/Logistics_SOMAGEC)
 
